@@ -1,5 +1,7 @@
+@import 'variables';
+
 body {
-  background-color: #EEE;
+  background-color: $blue;
 
   h1 {
     color: #244751;
