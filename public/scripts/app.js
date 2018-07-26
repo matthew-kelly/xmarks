@@ -1,3 +1,4 @@
+
 // // $(() => {
 // //   $.ajax({
 // //     method: "GET",
@@ -36,4 +37,5 @@ function initMap() {
     $map.appendTo($division);
     $('#map').show();
   })
+
 });
