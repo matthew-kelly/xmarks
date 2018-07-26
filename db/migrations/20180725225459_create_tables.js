@@ -12,15 +12,12 @@ exports.up = function (knex, Promise) {
       table.string('name');
       table.string('latitude_center');
       table.string('longitude_center');
-      table.integer('user_id');
-      table.foreign('user_id').references('users.id');
+      table.integer('user_id').references('users.id');
     }),
     knex.schema.createTable('likes', function (table) {
       table.increments('id');
-      table.integer('user_id');
-      table.foreign('user_id').references('users.id');
-      table.integer('map_id');
-      table.foreign('map_id').references('maps.id');
+      table.integer('user_id').references('users.id');
+      table.integer('map_id').references('maps.id');
     }),
     knex.schema.createTable('pins', function (table) {
       table.increments('id');
@@ -29,10 +26,8 @@ exports.up = function (knex, Promise) {
       table.string('image');
       table.string('latitude');
       table.string('longitude');
-      table.integer('user_id');
-      table.foreign('user_id').references('users.id');
-      table.integer('map_id');
-      table.foreign('map_id').references('maps.id');
+      table.integer('user_id').references('users.id');
+      table.integer('map_id').references('maps.id');
     })
   ])
 };
