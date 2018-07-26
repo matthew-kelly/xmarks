@@ -6,4 +6,32 @@ body {
   h1 {
     color: #244751;
   }
+
+  .container {
+    margin-top: 2em;
+  }
+
+  #map {
+    height: 40em;
+    width: 40em;
+    border-radius: 3em;
+    border: 2px solid black;
+  }
+  .profile_background {
+    height: 28em;
+    width: 100%;
+    background-color: steelblue;
+  }
+  .username {
+    display: flex;
+    justify-content: center;
+  }
+  .table {
+    border: 0.4em double white;
+  }
+  .login_button {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+  }
 }
