@@ -53,6 +53,11 @@ app.get("/profile", (req, res) => {
   res.status(200);
 })
 
+app.post('/maps', (req, res) => {
+  console.log("this");
+});
+
+
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);
 });
