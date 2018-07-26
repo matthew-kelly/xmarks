@@ -20,4 +20,16 @@ $(document).ready(function() {
       });
     var marker2 = new google.maps.Marker({ position: Van, map: map });
   }
+
+
+  $('.map1')
+    .click(function(event) {
+      // event.preventDefault();
+      const $division = $(`<div id='map'>`);
+      const $map = initMap();
+      $map.appendTo($division);
+      $('.thisiswhere').prepend($division);
+      $('#map').show();
+    })
+
 });

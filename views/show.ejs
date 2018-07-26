@@ -9,21 +9,10 @@
   <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
   <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
   <script type="text/javascript" src="/scripts/app.js"></script>
-  <style>
-  /* Set the size of the div element that contains the map */
-
-  #map {
-    height: 400px;
-    /* The height is 400 pixels */
-    width: 100%;
-    /* The width is the width of the web page */
-  }
-
-  </style>
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA3rnYZtj-7VMyBjm0Z2Qx3gYktTvZ4nqw&callback=initMap">
+  </script>
 </head>
-
 <body>
-  <!--The div element for the map -->
   <div id="map"></div>
   <script>
   // Initialize and add the map
@@ -34,16 +23,12 @@
         center: Van,
         zoom: 14,
       });
-    var marker2 = new google.maps.Marker({ position: Van, map: map });
+    // var marker2 = new google.maps.Marker({ position: Van, map: map });
   }
-
   </script>
-  <!--Load the API from the specified URL
-    * The async attribute allows the browser to render the page while the API loads
-    * The key parameter will contain your own API key (which is not needed for this tutorial)
-    * The callback parameter executes the initMap() function
-    -->
-  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA3rnYZtj-7VMyBjm0Z2Qx3gYktTvZ4nqw&callback=initMap">
-  </script>
+  <form method="POST" action ="/maps/">
+    <button class="button-default" type="submit"> Save map
+    </button>
+  </form>
 </body>
 </html>
