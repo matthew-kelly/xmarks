@@ -30,7 +30,7 @@ function initMap() {
 
   $('.map1')
   .click(function(event) {
-    event.preventDefault();
+    // event.preventDefault();
     const $division = $(`<div id='map'`);
     const $map = initMap();
     $map.appendTo($division);
