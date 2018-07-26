@@ -43,6 +43,16 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
+app.get("/maps", (req, res) => {
+  res.render("show")
+  res.status(201);
+});
+
+app.get("/profile", (req, res) => {
+  res.render("profile")
+  res.status(200);
+})
+
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);
 });
