@@ -2,27 +2,34 @@
 
 const express = require('express');
 const router = express.Router();
-const cookieParser  = require('cookie-parser');
+const cookieParser = require('cookie-parser');
 const app = express();
 
 app.use(cookieParser());
 
 module.exports = (knex) => {
-  // json data from database
+
   router.get("/api", (req, res) => {
     knex
       .select("*")
       .from("maps")
       .then((results) => {
-        // console.log(results);
         res.json(results);
       })
-      // .catch(e)
+    // .catch(e)
   });
 
-  // map 1 !!!!CHANGE TO :id!!!!
-  router.get("/1", (req, res) => {
-    res.status(200).render("show");
+  router.post("/", (req, res) => {
+    console.log(req.body);
+    console.log(req.cookies);
+    knex("maps").insert({
+      name: req.body.map_name,
+      latitude_center: "49.2827",
+      longitude_center: "-123.1207",
+      user_id: req.cookies["user_id"]
+    }).then(() => {
+      res.redirect("/users");
+    })
   })
 
   return router;

@@ -42,19 +42,5 @@ module.exports = (knex) => {
       })
   })
 
-  // router.get("/", (req, res) => {
-  //   const profile = req.cookies["user_id"];
-  //   knex
-  //     .select("username")
-  //     .from("users")
-  //     .where({
-  //       id: profile
-  //     })
-  //     .then((results) => {
-  //       // console.log(results);
-  //       return res.json(results);
-  //     })
-  // })
-
   return router;
 }
