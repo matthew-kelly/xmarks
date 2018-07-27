@@ -43,18 +43,14 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
-app.get("/maps", (req, res) => {
-  res.render("show")
-  res.status(201);
-});
-
 app.get("/profile", (req, res) => {
   res.render("profile")
   res.status(200);
 })
 
 app.post('/maps', (req, res) => {
-  console.log("this");
+  console.log(req.body)
+  res.status(201);
 });
 
 
