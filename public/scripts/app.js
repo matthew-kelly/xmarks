@@ -1,35 +1,69 @@
-// // $(() => {
-// //   $.ajax({
-// //     method: "GET",
-// //     url: "/api/users"
-// //   }).done((users) => {
-// //     for(user of users) {
-// //       $("<div>").text(user.name).appendTo($("body"));
-// //     }
-// //   });;
-// // });
+//On doc load
 
-$(document).ready(function() {
+$(() => {
+  $.ajax({
+    method: "GET",
+    url: "/api/users"
+  }).done((users) => {
+    for (user of users) {
+      $(".username").text(user.username);
+    }
+  });
 
-  function initMap() {
-    var Van = { lat: 49.2827, lng: -123.1207 };
-    var map = new google.maps.Map(
-      document.getElementById('map'), {
-        center: Van,
-        zoom: 14,
+  //Initializes the Map
+  $('.create_map').click(function(event) {
+    event.preventDefault();
+    $('#map').slideToggle();
+    $('.map_buttons').show('slow');
+
+    if (google && google.maps && google.maps.Map) {
+      var markers = [];
+      var Van = { lat: 49.2827, lng: -123.1207 };
+      var map = new google.maps.Map(
+        document.getElementById('map'), {
+          center: Van,
+          zoom: 15,
+        }
+      );
+
+      // This event listener will call addMarker() when the map is clicked.
+      map.addListener('click', function(event) {
+        addMarker(event.latLng);
       });
-    var marker2 = new google.maps.Marker({ position: Van, map: map });
-  }
 
+      // Adds a marker to the map and push to the array.
+      function addMarker(location) {
+        var marker = new google.maps.Marker({
+          position: location,
+          map: map,
+          title: 'Hello World!'
+        });
+        markers.push(marker);
+      }
 
-  $('.map1')
+      // Sets the map on all markers in the array.
+      function setMapOnAll(map) {
+        for (var i = 0; i < markers.length; i++) {
+          markers[i].setMap(map);
+        }
+      }
+    } else {
+      console.error("google maps appears to be unready")
+    }
+  })
+
+  $('#map').hide();
+  $('.map_buttons').hide();
+  $('#name_map_group').hide();
+
+  $('.save_map')
     .click(function(event) {
-      // event.preventDefault();
-      const $division = $(`<div id='map'>`);
-      const $map = initMap();
-      $map.appendTo($division);
-      $('.thisiswhere').prepend($division);
-      $('#map').show();
+      $('#name_map_group').slideToggle('fast');
     })
-
+  $('.delete_map')
+    .click(function(event) {
+      $('#map').slideToggle();
+      $('.map_buttons').hide('slow');
+      $('#map').empty();
+    })
 });
