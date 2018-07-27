@@ -51,18 +51,6 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
-// app.get("/maps", (req, res) => {
-//   res.render("show")
-//   res.status(201);
-// });
-
-app.post('/maps', (req, res) => {
-  console.log(req.body);
-  console.log(req.cookies);
-  // console.log(req.body.map_marker_json)
-  res.send(201);
-})
-
 app.get("/profile", (req, res) => {
   res.cookie("user_id", "1");
   const user_id = req.cookies["user_id"];
