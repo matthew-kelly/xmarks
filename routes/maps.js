@@ -19,6 +19,20 @@ module.exports = (knex) => {
       .catch(e => console.error(e))
   });
 
+  router.get("/:id", (req, res) => {
+    const map_id = req.params.id;
+    knex
+      .select("*")
+      .from("pins")
+      .leftJoin("maps", "map_id", "maps.id")
+      .where({
+        map_id: map_id
+      })
+      .then((results) => {
+        res.json(results);
+      })
+  })
+
   router.post("/", (req, res) => {
     const pinsArray = JSON.parse(req.body.pins_array);
     knex("maps").insert({
