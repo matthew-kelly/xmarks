@@ -59,6 +59,7 @@ app.get("/", (req, res) => {
 app.post('/maps', (req, res) => {
   console.log(req.body);
   console.log(req.cookies);
+  // console.log(req.body.map_marker_json)
   res.send(201);
 })
 
