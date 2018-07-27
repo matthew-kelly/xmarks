@@ -29,15 +29,19 @@ $(() => {
 
       // This event listener will call addMarker() when the map is clicked.
       map.addListener('click', function(event) {
-        addMarker(event.latLng);
+        var title = window.prompt("name this title");
+        if (title) {
+          addMarker(event.latLng, title);
+        } else
+        return;
       });
 
       // Adds a marker to the map and push to the array.
-      function addMarker(location) {
+      function addMarker(location, title) {
         var marker = new google.maps.Marker({
           position: location,
           map: map,
-          title: 'Hello World!'
+          title: title
         });
         console.log(marker.getPosition().lat())
         let innerObj = {};
@@ -79,7 +83,7 @@ $(() => {
   $('#name_map_group').click(function(event) {
     event.preventDefault();
     console.log(markerArr);
-    $.post('http://localhost:8080/maps', {pins: markerArr});
+    $.post('http://localhost:8080/maps', { pins: markerArr });
     // $.ajax({
     //   method: "POST",
     //   url: "/maps"

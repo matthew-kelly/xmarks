@@ -58,7 +58,6 @@ exports.seed = function (knex, Promise) {
     .then(() => {
       return knex('pins').insert({
         title: 'starbucks',
-        description: 'Its a starbucks',
         latitude: '49.2827',
         longitude: '-123.1207',
         user_id: 1,
@@ -68,7 +67,6 @@ exports.seed = function (knex, Promise) {
     .then(() => {
       return knex('pins').insert({
         title: 'tim hortons',
-        description: 'Timmy hos',
         latitude: '49.2825',
         longitude: '-123.1214',
         user_id: 2,
@@ -78,7 +76,6 @@ exports.seed = function (knex, Promise) {
     .then(() => {
       return knex('pins').insert({
         title: 'starbucks, again',
-        description: 'Its another starbucks',
         latitude: '49.2827',
         longitude: '-123.1207',
         user_id: 2,
