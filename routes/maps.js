@@ -20,8 +20,8 @@ module.exports = (knex) => {
   });
 
   router.post("/", (req, res) => {
-    console.log(req.body);
-    console.log(req.cookies);
+    console.log("req.body", req.body);
+    console.log("req.cookies", req.cookies);
     knex("maps").insert({
       name: req.body.map_name,
       latitude_center: "49.2827",

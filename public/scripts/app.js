@@ -33,7 +33,7 @@ $(() => {
         if (title) {
           addMarker(event.latLng, title);
         } else
-        return;
+          return;
       });
 
       // Adds a marker to the map and push to the array.
@@ -43,13 +43,13 @@ $(() => {
           map: map,
           title: title
         });
-        console.log(marker.getPosition().lat())
+        // console.log(marker.getPosition().lat())
         let innerObj = {};
         innerObj.latitude = marker.getPosition().lat();
         innerObj.longitude = marker.getPosition().lng();
         innerObj.title = marker.title;
         markerArr.push(innerObj)
-        console.log(markerArr)
+        // console.log(markerArr)
         markers.push(marker);
       }
 
@@ -77,13 +77,14 @@ $(() => {
     $('#map').slideToggle();
     $('.map_buttons').hide('slow');
     $('#map').empty();
+    $('#name_map_group').hide('fast');
     markers = [];
   })
 
   $('#name_map_group').click(function(event) {
-    event.preventDefault();
-    console.log(markerArr);
-    $.post('http://localhost:8080/maps', { pins: markerArr });
+    // event.preventDefault();
+    var value = $('#map_name').value
+    $.post('http://localhost:8080/maps', { pins: markerArr }, value);
     // $.ajax({
     //   method: "POST",
     //   url: "/maps"
