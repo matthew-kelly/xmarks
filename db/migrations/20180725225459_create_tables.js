@@ -23,8 +23,6 @@ exports.up = function (knex, Promise) {
     knex.schema.createTable('pins', function (table) {
       table.increments('id');
       table.string('title');
-      table.string('description');
-      table.string('image');
       table.string('latitude');
       table.string('longitude');
       table.integer('user_id').references('users.id');
