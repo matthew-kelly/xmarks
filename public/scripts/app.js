@@ -13,13 +13,16 @@ $(() => {
   var markers = [];
   var markerArr = [];
   //Initializes the Map
-  $('.create_map').click(function(event) {
+  $('.create_map').click(function (event) {
     event.preventDefault();
     $('#map').slideToggle();
     $('.map_buttons').show('slow');
 
     if (google && google.maps && google.maps.Map) {
-      var Van = { lat: 49.2827, lng: -123.1207 };
+      var Van = {
+        lat: 49.2827,
+        lng: -123.1207
+      };
       var map = new google.maps.Map(
         document.getElementById('map'), {
           center: Van,
@@ -28,7 +31,7 @@ $(() => {
       );
 
       // This event listener will call addMarker() when the map is clicked.
-      map.addListener('click', function(event) {
+      map.addListener('click', function (event) {
         var title = window.prompt("name this title");
         if (title) {
           addMarker(event.latLng, title);
@@ -45,11 +48,10 @@ $(() => {
         });
         // console.log(marker.getPosition().lat())
         let innerObj = {};
+        innerObj.title = marker.title;
         innerObj.latitude = marker.getPosition().lat();
         innerObj.longitude = marker.getPosition().lng();
-        innerObj.title = marker.title;
-        markerArr.push(innerObj)
-        // console.log(markerArr)
+        markerArr.push(innerObj);
         markers.push(marker);
       }
 
@@ -61,7 +63,7 @@ $(() => {
       }
 
     } else {
-      console.error("google maps appears to be unready")
+      console.error("google maps appears to be unready");
     }
   })
 
@@ -69,11 +71,11 @@ $(() => {
   $('.map_buttons').hide();
   $('#name_map_group').hide();
 
-  $('.name_map').click(function(event) {
+  $('.name_map').click(function (event) {
     $('#name_map_group').slideToggle('fast');
   })
 
-  $('.delete_map').click(function(event) {
+  $('.delete_map').click(function (event) {
     $('#map').slideToggle();
     $('.map_buttons').hide('slow');
     $('#map').empty();
@@ -81,10 +83,15 @@ $(() => {
     markers = [];
   })
 
-  $('#name_map_group').click(function(event) {
+  $('#name_map_group').click(function (event) {
     // event.preventDefault();
-    var value = $('#map_name').value
-    $.post('http://localhost:8080/maps', { pins: markerArr }, value);
+    var map_name = $('#map_name').value;
+    console.log("map name from app.js: ", map_name);
+    console.log(markerArr);
+    $.post('http://localhost:8080/maps', {
+      pins: markerArr,
+      map_name: map_name
+    });
     // $.ajax({
     //   method: "POST",
     //   url: "/maps"
