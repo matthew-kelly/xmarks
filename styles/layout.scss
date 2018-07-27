@@ -12,17 +12,18 @@ body {
   .mapdiv#map {
     overflow: hidden;
     height: 45em;
-    width: 80%;
+    width: 88%;
     border-radius: 2.3em;
     border: 2px solid black;
     position: absolute;
-    right: 10%;
-    top: 3em;
+    right: 6%;
+    top: 2em;
   }
   .profile_background {
     height: 28em;
     width: 100%;
     background-color: steelblue;
+    border-radius: 2em;
   }
   .username {
     display: flex;

@@ -9,7 +9,6 @@
   <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
   <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
   <script type="text/javascript" src="/scripts/app.js"></script>
-
 </head>
 
 <body>
@@ -22,28 +21,28 @@
       </div>
     </div>
     <div class="row">
-      <div class="table col-4"><p><%= description %></p></div>
+      <div class="table col-4">
+        <p>
+          <%= description %>
+        </p>
+      </div>
       <div class="table col-8">
         <ul>
-          <li>One list item</li>
+          <li>
+            <button id="map1">One list item</button>
+          </li>
           <li>Two list item</li>
           <li>Three</li>
         </ul>
-        <form method='GET' action="/maps">
-          <button class='btn btn-danger create_map' type="submit"> Create a new map</button>
-        </form>
+        <button class='btn btn-danger create_map'> Create a new map</button>
       </div>
     </div>
   </div>
   <!-- <img src= /public/images/redx.png> -->
   <div class="mapdiv" id='map'></div>
   <div class=map_buttons>
-    <!-- <form method="POST" action="/maps"> -->
-      <button class='btn btn-primary name_map'>Name this map</button>
-    </form>
-    <!-- <form method="POST" action="/maps"> -->
-      <button class='btn btn-primary delete_map'>Delete this map</button>
-    <!-- </form> -->
+    <button class='btn btn-primary name_map'>Name this map</button>
+    <button class='btn btn-primary close_map'>Close Map</button>
   </div>
   <form method="POST" action="/maps" id="name_map_group">
     <div class="form-group">
