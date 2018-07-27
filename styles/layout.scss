@@ -23,7 +23,8 @@ body {
     height: 28em;
     width: 100%;
     background-color: steelblue;
-    border-radius: 2em;
+    border-radius: 13em;
+    padding: 1em;
   }
   .username {
     display: flex;
@@ -65,5 +66,12 @@ body {
   .new_map_header {
     display: flex;
     justify-content: center;
+  }
+  #profile_pic {
+    border-radius: 20em;
+    height: 100%;
+    width: 40%;
+    background-color: white;
+    margin: auto;
   }
 }
