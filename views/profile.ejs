@@ -29,26 +29,21 @@
           <li>Two list item</li>
           <li>Three</li>
         </ul>
-        <form method='GET' action="/maps">
           <button class='btn btn-danger create_map' type="submit"> Create a new map</button>
-        </form>
       </div>
     </div>
   </div>
   <!-- <img src= /public/images/redx.png> -->
   <div class="mapdiv" id='map'></div>
   <div class=map_buttons>
-    <!-- <form method="POST" action="/maps"> -->
       <button class='btn btn-primary name_map'>Name this map</button>
-    </form>
-    <!-- <form method="POST" action="/maps"> -->
       <button class='btn btn-primary delete_map'>Delete this map</button>
-    <!-- </form> -->
   </div>
   <form method="POST" action="/maps" id="name_map_group">
     <div class="form-group">
       <label class="new_map_header" for="map_name">Enter a map name</label>
       <input name="map_name" type="text" class="form-control" id="map_name" placeholder="Ex: Ryan Reynolds sightings">
+      <input name="pins_array" type="hidden">
     </div>
     <button type="submit" class="btn btn-primary">Save Map!</button>
   </form>

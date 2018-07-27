@@ -35,8 +35,11 @@ $(() => {
         var title = window.prompt("name this title");
         if (title) {
           addMarker(event.latLng, title);
+          $("input[name='pins_array']").val("");
+          $("input[name='pins_array']").val(JSON.stringify(markerArr));
+          console.log("pins_array from app.js: ", markerArr);
         } else
-          return;
+          return false;
       });
 
       // Adds a marker to the map and push to the array.
@@ -85,13 +88,14 @@ $(() => {
 
   $('#name_map_group').click(function (event) {
     // event.preventDefault();
-    var map_name = $('#map_name').value;
-    console.log("map name from app.js: ", map_name);
-    console.log(markerArr);
-    $.post('http://localhost:8080/maps', {
-      pins: markerArr,
-      map_name: map_name
-    });
+    // var map_name = $('#map_name').value;
+    // $("input[name='pins_array']").val("")
+    // $("input[name='pins_array']").val(markerArr);
+    // console.log("pins_array from app.js: ", markerArr);
+    // $.post('http://localhost:8080/maps', {
+    //   pins: markerArr,
+    //   map_name: map_name
+    // });
     // $.ajax({
     //   method: "POST",
     //   url: "/maps"

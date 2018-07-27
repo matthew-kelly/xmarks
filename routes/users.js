@@ -16,7 +16,7 @@ module.exports = (knex) => {
       .then((users) => {
         return res.json(users);
       })
-    // .catch((e))
+      .catch(e => console.error(e))
   });
 
   router.get("/", (req, res) => {
@@ -40,6 +40,7 @@ module.exports = (knex) => {
         userObj.color = rows[0].color;
         res.status(200).render("profile", userObj);
       })
+      .catch(e => console.error(e))
   })
 
   return router;

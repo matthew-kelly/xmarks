@@ -16,33 +16,47 @@ module.exports = (knex) => {
       .then((results) => {
         res.json(results);
       })
-    // .catch(e)
+      .catch(e => console.error(e))
   });
 
   router.post("/", (req, res) => {
-    console.log("map name from maps.js: ", req.body.map_name);
+    const pinsArray = JSON.parse(req.body.pins_array);
     knex("maps").insert({
-      name: req.body.map_name,
-      latitude_center: "49.2827",
-      longitude_center: "-123.1207",
-      user_id: req.cookies["user_id"]
-    }).returning('id')
-    .then(newId => {
-      const mapID = parseInt(newId[0]);
-      const pinsArray = req.body.pins;
-      console.log("pinsArray: ", pinsArray);
-      // pinsArray.forEach(function (pin) {
-      //   knex("pins").insert({
-      //     title: pin.title,
-      //     latitude: pin.latitude,
-      //     longitude: pin.longitude,
-      //     user_id: req.cookies["user_id"],
-      //     map_id: mapID
-      //   })
-      // })
-    }).then(() => {
-      res.redirect("/users");
-    })
+        name: req.body.map_name,
+        latitude_center: "49.2827",
+        longitude_center: "-123.1207",
+        user_id: req.cookies["user_id"]
+      }).returning('id')
+      .then(newId => {
+        const mapID = parseInt(newId[0]);
+        pinsArray.forEach((pin) => {
+          knex("pins").insert({
+            title: pin.title,
+            latitude: pin.latitude,
+            longitude: pin.longitude,
+            user_id: req.cookies["user_id"],
+            map_id: mapID
+          }).then();
+        })
+
+        res.redirect("/users");
+      })
+      .catch(e => console.error(e))
+  })
+
+  router.get("/:id", (req, res) => {
+    const map_id = req.params.id;
+    knex
+      .select("*")
+      .from("pins")
+      .leftJoin("maps", "map_id", "maps.id")
+      .where({
+        map_id: map_id
+      })
+      .then((results) => {
+        res.json(results);
+      })
+      .catch(e => console.error(e))
   })
 
   return router;
