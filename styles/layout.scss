@@ -6,16 +6,18 @@ body {
   h1 {
     color: #244751;
   }
-
   .container {
     margin-top: 2em;
   }
-
-  #map {
+  .mapdiv#map {
+    overflow: hidden;
     height: 40em;
-    width: 40em;
-    border-radius: 3em;
+    width: 80%;
+    border-radius: 2.3em;
     border: 2px solid black;
+    position: absolute;
+    right: 9.5em;
+    top: 13em;
   }
   .profile_background {
     height: 28em;
@@ -33,5 +35,35 @@ body {
     display: flex;
     justify-content: center;
     align-content: center;
+  }
+  .popup_form {
+    margin-left: 15em;
+    margin-top: -26em;
+    z-index: 999;
+  }
+  .map_buttons {
+    display: flex;
+    align-content: center;
+    position: relative;
+    top: -11em;
+    width: auto;
+    justify-content: center;
+  }
+  .btn {
+    background-color: $teal;
+  }
+  #name_map_group {
+    background-color: $teal;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    position: absolute;
+    left: 40em;
+    top: 29em;
+  }
+  .new_map_header {
+    display: flex;
+    justify-content: center;
   }
 }
