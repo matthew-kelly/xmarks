@@ -9,6 +9,7 @@ app.use(cookieParser());
 
 module.exports = (knex) => {
 
+  // Display all likes from database in JSON format
   router.get("/api", (req, res) => {
     knex
       .select("*")

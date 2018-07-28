@@ -1,7 +1,6 @@
-//On doc load
-
+// On document load:
 $(() => {
-  // Adds a marker to the map and push to the array.
+  // Adds a marker to the map and pushes to the markers array.
   function addMarker(location, title, map1) {
     var marker = new google.maps.Marker({
       position: location,
@@ -16,7 +15,7 @@ $(() => {
     markers.push(marker);
   }
 
-  //adds event listener to add pins with titles
+  // Adds event listener to add pins with titles
   function addEventListener(map) {
     map.addListener('click', function (event) {
       var title = window.prompt("name this title");
@@ -55,7 +54,7 @@ $(() => {
   var markers = [];
   var markerArr = [];
 
-  //Initializes the Map
+  // Initializes the Map
   $('.create_map').click(function (event) {
     event.preventDefault();
     $('#map').slideToggle();
@@ -79,7 +78,7 @@ $(() => {
     }
   })
 
-  //AJAX call to get the data from whichever MAP link is clicked and populate the pins on the map
+  // AJAX call to get the data from whichever map link is clicked and populate the pins on the map
   $("[id^=map]").click(function (event) {
     var id_number = this.id.slice(3);
     console.log(id_number);

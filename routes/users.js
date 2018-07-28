@@ -9,6 +9,7 @@ app.use(cookieParser());
 
 module.exports = (knex) => {
 
+  // Display all users from database in JSON format
   router.get("/api", (req, res) => {
     knex
       .select("*")
@@ -19,11 +20,13 @@ module.exports = (knex) => {
       .catch(e => console.error(e))
   });
 
+  // Redirect from /users to /users/:id
   router.get("/", (req, res) => {
     let user_id = req.cookies.user_id;
     res.redirect(`/users/${user_id}`);
   })
 
+  // Render /users/:id, pass in user info and their maps
   router.get("/:id", (req, res) => {
     const userProfile = req.params.id;
     let templateVars = {};

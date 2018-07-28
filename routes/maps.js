@@ -9,6 +9,7 @@ app.use(cookieParser());
 
 module.exports = (knex) => {
 
+  // Display all maps from database in JSON format
   router.get("/api", (req, res) => {
     knex
       .select("*")
@@ -19,6 +20,7 @@ module.exports = (knex) => {
       .catch(e => console.error(e))
   });
 
+  // Return all pins associated with the map:id
   router.get("/:id", (req, res) => {
     const map_id = req.params.id;
     knex
@@ -31,8 +33,10 @@ module.exports = (knex) => {
       .then((results) => {
         res.json(results);
       })
+      .catch(e => console.error(e))
   })
 
+  // Add new map and pins to database
   router.post("/", (req, res) => {
     const pinsArray = JSON.parse(req.body.pins_array);
     knex("maps").insert({
@@ -52,23 +56,7 @@ module.exports = (knex) => {
             map_id: mapID
           }).then();
         })
-
         res.redirect("/users");
-      })
-      .catch(e => console.error(e))
-  })
-
-  router.get("/:id", (req, res) => {
-    const map_id = req.params.id;
-    knex
-      .select("*")
-      .from("pins")
-      .leftJoin("maps", "map_id", "maps.id")
-      .where({
-        map_id: map_id
-      })
-      .then((results) => {
-        res.json(results);
       })
       .catch(e => console.error(e))
   })

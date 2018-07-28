@@ -31,10 +31,12 @@
         </p>
       </div>
       <div class="table col-8">
-        <ul>
+        <div class="table_buttons">
           <button>Maps I've made!</button>
           <button>Maps I've liked!</button>
           <button>Maps I've contributed to</button>
+        </div>
+        <ul>
           <% for (var map in mapsObj) { %>
             <li>
               <button id="map<%= mapsObj[map].id %>">
