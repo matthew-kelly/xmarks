@@ -3,7 +3,8 @@
 
 <head>
   <title>Home Page</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B"
+    crossorigin="anonymous">
   <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
   <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
   <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
@@ -18,7 +19,9 @@
         <div class="profile_background table">
           <div id="profile_pic"></div>
         </div>
-        <h1 class="username"><%= username %></h1>
+        <h1 class="username">
+          <%= userObj.username %>
+        </h1>
       </div>
     </div>
     <div id="table_section">
@@ -31,19 +34,18 @@
     <div class="row maps_table">
       <div class="table col-6">
         <p>
-          <%= description %>
+          <%= userObj.description %>
         </p>
       </div>
-
       <div class="table col-6">
         <ul>
-          <li>
-            <button id="map1">One list item</button>
-          </li>
-          <li>
-            <button id="map2">Two list item</button>
-          </li>
-          <li>Three</li>
+          <% for (var map in mapsObj) { %>
+            <li>
+              <button id="map<%= mapsObj[map].id %>">
+                <%= mapsObj[map].name %>
+              </button>
+            </li>
+            <% } %>
         </ul>
         <button class='btn btn-danger create_map'> Create a new map</button>
       </div>
