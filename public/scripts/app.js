@@ -80,7 +80,9 @@ $(() => {
   })
 
   //AJAX call to get the data from whichever MAP link is clicked and populate the pins on the map
-  $('#map1').click(function (event) {
+  $("[id^=map]").click(function (event) {
+    var id_number = this.id.slice(3);
+    console.log(id_number);
     var Van = {
       lat: 49.2827,
       lng: -123.1207
@@ -96,7 +98,7 @@ $(() => {
     $('.map_buttons').show('slow');
     $.ajax({
       method: "GET",
-      url: "/maps/1"
+      url: `/maps/${id_number}`
     }).done((pins) => {
       pins.forEach(function (pin) {
         markers.push(new google.maps.Marker({
