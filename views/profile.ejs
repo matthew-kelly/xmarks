@@ -21,14 +21,22 @@
         <h1 class="username"><%= username %></h1>
       </div>
     </div>
-    <div class="row">
-      <div class="table col-4">
+    <div id="table_section">
+      <img class ="addressbook" src = ../images/collage.png>
+      <div id="button_section">
+        <button class="tab_button">Made</button>
+        <button class="tab_button">Liked</button>
+        <button class="tab_button">Contrib</button>
+      </div>
+    <div class="row maps_table">
+      <div class="table col-6">
         <p>
           <%= description %>
         </p>
       </div>
-      <div class="table col-8">
-        <ul><button>Maps I've made!</button><button>Maps I've liked!</button><button>Maps I've contributed to</button>
+
+      <div class="table col-6">
+        <ul>
           <li>
             <button id="map1">One list item</button>
           </li>
@@ -55,6 +63,7 @@
     </div>
     <button type="submit" class="btn btn-primary">Save Map!</button>
   </form>
+</div>
 </body>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA3rnYZtj-7VMyBjm0Z2Qx3gYktTvZ4nqw">
 
