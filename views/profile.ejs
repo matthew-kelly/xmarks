@@ -25,7 +25,7 @@
       </div>
     </div>
     <div id="table_section">
-      <img class="addressbook" src=. ./images/collage.png>
+      <img class="addressbook" src="../images/collage.png">
       <div id="button_section">
         <button class="tab_button">Made</button>
         <button class="tab_button">Liked</button>
@@ -41,7 +41,7 @@
           <ul>
             <% for (var map in mapsObj) { %>
               <li>
-                <button id="map<%= mapsObj[map].id %>">
+                <button id="user_map<%= mapsObj[map].id %>">
                   <%= mapsObj[map].name %>
                 </button>
               </li>

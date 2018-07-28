@@ -84,8 +84,8 @@ $(() => {
   })
 
   // AJAX call to get the data from whichever map link is clicked and populate the pins on the map
-  $("[id^=map]").click(function (event) {
-    var id_number = this.id.slice(3);
+  $("[id^=user_map]").click(function (event) {
+    var id_number = this.id.slice(8);
     var Van = {
       lat: 49.2827,
       lng: -123.1207
