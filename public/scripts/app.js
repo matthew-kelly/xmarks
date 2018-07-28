@@ -11,7 +11,7 @@ $(() => {
   $('.save_map').hide();
 
   // Adds a marker to the map and pushes to the markers array.
-  function addMarker(location, title, map1) {
+  function addMarker(location, title, map1, description) {
     console.log(location);
     var image = {
       url: '../images/xmark.png',
@@ -28,24 +28,25 @@ $(() => {
     };
 
     // IF ITS STUPID AND IT WORKS IT'S NOT STUPID
-    var locationObj = JSON.stringify(location);
-    locationObj.replace(/"{"lat":/g, "").replace(/""lng":/g, "").replace(/}/g, "")
-    console.log(locationObj)
-    var locationArr1 = locationObj.split(':')
-    var locationArr2 = locationArr1.toString().split('}');
-    var locationArr3 = locationArr2.toString().split(',');
-    console.log(locationArr3);
+    // var locationObj = JSON.stringify(location);
+    // locationObj.replace(/"{"lat":/g, "").replace(/""lng":/g, "").replace(/}/g, "")
+    // console.log(locationObj)
+    // var locationArr1 = locationObj.split(':')
+    // var locationArr2 = locationArr1.toString().split('}');
+    // var locationArr3 = locationArr2.toString().split(',');
+    // console.log(locationArr3);
     var infowindow = new google.maps.InfoWindow({
-      content: '<h1>' + title + '</h1>' +
-        '[lat, lang] : [' + locationArr3[1] + ',' + locationArr3[3] + ']' +
-        '<br><button class="btn btn-default remove-marker" data-marker-lat="' +
-        locationArr3[1] + '" data-marker-lng="' + locationArr3[3] + '">Delete marker</button>'
+      content: '<h1>' + title + '</h1>' + '<p>' + description + '</p>'
+        // '[lat, lang] : [' + locationArr3[1] + ',' + locationArr3[3] + ']' +
+        // '<br><button class="btn btn-default remove-marker" data-marker-lat="' +
+        // locationArr3[1] + '" data-marker-lng="' + locationArr3[3] + '">Delete marker</button>'
     });
 
     var marker = new google.maps.Marker({
       position: location,
       map: map1,
       title: title,
+      description: description,
       icon: image,
       shape: shape,
       draggable: true,
@@ -70,8 +71,9 @@ $(() => {
   function addEventListener(map) {
     map.addListener('click', function(event) {
       var title = window.prompt("name this title");
+      var description = window.prompt("describe this place");
       if (title) {
-        addMarker(event.latLng, title, map);
+        addMarker(event.latLng, title, map, description);
         $("input[name='pins_array']").val("");
         $("input[name='pins_array']").val(JSON.stringify(markerArr));
       }
@@ -163,7 +165,7 @@ $(() => {
       url: `/maps/${id_number}`
     }).done((pins) => {
       pins.forEach(function(pin) {
-        markers.push(new google.maps.Marker({
+        var marker = new google.maps.Marker({
           position: {
             lat: Number(pin.latitude),
             lng: Number(pin.longitude)
@@ -177,7 +179,14 @@ $(() => {
             console.log(marker_index);
             console.log(m.latLng.lat())
           }
-        }));
+        })
+        var infowindow = new google.maps.InfoWindow({
+          content: '<h1>' + pin.title + '</h1>'
+        });
+        marker.addListener('click', function() {
+          infowindow.open(map, marker);
+        });
+        markers.push(marker);
       });
       showMarkers();
     });
