@@ -3,7 +3,6 @@ $(() => {
 
   var markers = [];
   var markerArr = [];
-
   // on document load hides the map/map buttons/ and the name map form
   $('#map').hide();
   $('.map_buttons').hide();
@@ -11,6 +10,7 @@ $(() => {
 
   // Adds a marker to the map and pushes to the markers array.
   function addMarker(location, title, map1) {
+    console.log(location);
     var image = {
       url: '../images/xmark.png',
       // This marker is 20 pixels wide by 32 pixels high.
@@ -25,13 +25,37 @@ $(() => {
       type: 'poly'
     };
 
+    // IF ITS STUPID AND IT WORKS IT'S NOT STUPID
+    var locationObj = JSON.stringify(location);
+    locationObj.replace(/"{"lat":/g, "").replace(/""lng":/g, "").replace(/}/g, "")
+    console.log(locationObj)
+    var locationArr1 = locationObj.split(':')
+    var locationArr2 = locationArr1.toString().split('}');
+    var locationArr3 = locationArr2.toString().split(',');
+    console.log(locationArr3);
+    var infowindow = new google.maps.InfoWindow({
+      content :'<h1>'+ title +'</h1>' +
+        '[lat, lang] : [' + locationArr3[1] + ',' + locationArr3[3] + ']' +
+        '<br><button class="btn btn-default remove-marker" data-marker-lat="'+
+        locationArr3[1] +'" data-marker-lng="'+locationArr3[3]+'">Delete marker</button>'
+      });
+
     var marker = new google.maps.Marker({
       position: location,
       map: map1,
       title: title,
       icon: image,
       shape: shape,
+      draggable: true,
+      dragend: function(m) {
+        console.log(marker_index);
+        console.log(m.latLng.lat())
+      }
     });
+    marker.addListener('click', function() {
+      infowindow.open(map, marker);
+    });
+
     var innerObj = {};
     innerObj.title = marker.title;
     innerObj.latitude = marker.getPosition().lat();
@@ -73,6 +97,7 @@ $(() => {
   function deleteMarkers() {
     clearMarkers();
     markers = [];
+    markerArr = [];
   }
 
   // Initializes the Map
@@ -149,14 +174,13 @@ $(() => {
     });
   })
 
-
   $('[id^=made]').click(function(event) {
     console.log(this.id);
     var id_number = this.id.slice(4)
     $.ajax({
       method: "GET",
       url: `/users/${id_number}/made/`
-    }).done( () => {
+    }).done(() => {
       return;
     })
   });
@@ -165,7 +189,7 @@ $(() => {
     $.ajax({
       method: "GET",
       url: `/users/${id_number}/likes`
-    }).done( () => {
+    }).done(() => {
       return;
     })
   });
@@ -174,7 +198,7 @@ $(() => {
     $.ajax({
       method: "GET",
       url: `/user/${id_number}/contrib`
-    }).done( () => {
+    }).done(() => {
       return;
     })
   })
@@ -185,15 +209,32 @@ $(() => {
     $('#map_name').focus();
   })
 
+  // $('.mapdiv').click('div.gmnoprint .remove-marker', function(event) {
+  //   console.log($(this));
+  //   event.preventDefault();
+  //   // var lat = $(this).data("marker-lat");
+  //   // var lng = $(this).data("marker-lng");
+  //   // console.log("deleting marker ", lat, lng);
+  //   $.each(map.markers, function(index, marker) {
+  //   //   var m_lat = marker.getPosition().lat();
+  //   //   var m_lng = marker.getPosition().lng();
+  //   //   if (m_lat == lat && m_lng == lng) {
+  //     map.removeMarker(map.markers[index]);
+  //     // return false;
+  //     // }
+  //   });
+  // });
+
   // closes map and clears all markers from markerarray.
   $('.close_map').click(function(event) {
+    deleteMarkers();
     $('#map').hide('fast');
     $('.map_buttons').hide('fast');
     $('#name_map_group').hide('fast');
-    deleteMarkers();
   })
 
   $('#name_map_group').submit(function(event) {
     var map_name = $('#map_name').value;
   })
+
 });
