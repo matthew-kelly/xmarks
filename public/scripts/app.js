@@ -6,11 +6,12 @@ $(() => {
 
   // on document load hides the map/map buttons/ and the name map form
   $('#map').hide();
-  $('.map_buttons').hide();
-  $('#name_map_group').hide();
+  $('.name_map').hide();
+  $('.close_map').hide();
+  $('.form-group').hide();
+  $('.save_map').hide();
 
   // Adds a marker to the map and pushes to the markers array.
-<<<<<<< Updated upstream
   function addMarker(location, title, map1) {
     var image = {
       url: '../images/xmark.png',
@@ -32,13 +33,6 @@ $(() => {
       title: title,
       icon: image,
       shape: shape,
-=======
-  function addMarker(location, creator, title, map1) {
-    var marker = new google.maps.Marker({
-      position: location,
-      map: map1,
-      title: `${creator}: ${title}`
->>>>>>> Stashed changes
     });
     var innerObj = {};
     innerObj.title = marker.title;
@@ -87,7 +81,8 @@ $(() => {
   $('.create_map').click(function(event) {
     event.preventDefault();
     $('#map').show('fast');
-    $('.map_buttons').show('fast');
+    $('.name_map').show('fast');
+    $('.close_map').show('fast');
 
     if (google && google.maps && google.maps.Map) {
       var Van = {
@@ -122,7 +117,7 @@ $(() => {
     );
     var image = {
       url: '../images/xmark.png',
-      // This marker is 20 pixels wide by 32 pixels high.
+      // This marker is 30 pixels wide by 32 pixels high.
       size: new google.maps.Size(30, 32),
       // The origin for this image is (0, 0).
       origin: new google.maps.Point(0, 0),
@@ -136,7 +131,8 @@ $(() => {
 
     addEventListener(map);
     $('#map').show('fast');
-    $('.map_buttons').show('fast');
+    $('.name_map').show('fast');
+    $('.close_map').show('fast');
     $.ajax({
       method: "GET",
       url: `/maps/${id_number}`
@@ -164,40 +160,45 @@ $(() => {
     $.ajax({
       method: "GET",
       url: `/users/${id_number}/made/`
-    }).done( () => {
-      return;
+    }).done(() => {
+      location.reload();
     })
   });
   $('[id^=liked]').click(function(event) {
+    console.log(this.id);
     var id_number = this.id.slice(5)
     $.ajax({
       method: "GET",
       url: `/users/${id_number}/likes`
-    }).done( () => {
-      return;
+    }).done(() => {
+      location.reload();
     })
   });
   $('[id^=contrib]').click(function(event) {
+    console.log(this.id);
     var id_number = this.id.slice(7)
     $.ajax({
       method: "GET",
-      url: `/user/${id_number}/contrib`
-    }).done( () => {
-      return;
+      url: `/users/${id_number}/contrib`
+    }).done(() => {
+      location.reload();
     })
   })
 
   //When name_map button is clicked, slides the save map form into view and focuses it.
   $('.name_map').click(function(event) {
-    $('#name_map_group').slideToggle('fast');
+    $('.form-group').show('fast');
+    $('.save_map').show('fast');
     $('#map_name').focus();
   })
 
   // closes map and clears all markers from markerarray.
   $('.close_map').click(function(event) {
     $('#map').hide('fast');
-    $('.map_buttons').hide('fast');
-    $('#name_map_group').hide('fast');
+    $('.name_map').hide('fast');
+    $('.close_map').hide('fast');
+    $('.form-group').hide('fast');
+    $('.save_map').hide('fast');
     deleteMarkers();
   })
 

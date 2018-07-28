@@ -55,6 +55,7 @@ app.get("/", (req, res) => {
 // Assign login cookie, redirect to user's page
 app.get("/profile", (req, res) => {
   res.cookie("user_id", "1");
+  res.cookie("current_tab", "made");
   const user_id = req.cookies["user_id"];
   res.redirect(`/users/${user_id}`);
 })
