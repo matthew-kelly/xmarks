@@ -20,5 +20,18 @@ module.exports = (knex) => {
       });
   });
 
+  router.post("/:id", (req, res) => {
+    const user_id = req.cookies.user_id;
+    const map_id = req.params.id;
+    knex("likes").insert({
+        user_id: user_id,
+        map_id: map_id
+      })
+      .then(() => {
+        res.redirect("/users");
+      })
+      .catch(e => console.error(e))
+  })
+
   return router;
 }

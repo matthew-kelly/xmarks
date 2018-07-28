@@ -43,7 +43,7 @@ module.exports = (knex) => {
         name: req.body.map_name,
         latitude_center: "49.2827",
         longitude_center: "-123.1207",
-        user_id: req.cookies["user_id"]
+        user_id: req.cookies.user_id
       }).returning('id')
       .then(newId => {
         const mapID = parseInt(newId[0]);
@@ -52,7 +52,7 @@ module.exports = (knex) => {
             title: pin.title,
             latitude: pin.latitude,
             longitude: pin.longitude,
-            user_id: req.cookies["user_id"],
+            user_id: req.cookies.user_id,
             map_id: mapID
           }).then();
         })

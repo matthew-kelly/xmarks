@@ -55,13 +55,19 @@
                 <button id="user_map<%= likesObj[map].id %>">
                   <%= likesObj[map].name %>
                 </button>
+                <button id="like<%= likesObj[map].id %>">
+                  Like
+                </button>
               </li>
             <% } %>
           <% } else if (current_tab === "contrib") { %>
             <% for (var map in contribObj) { %>
               <li>
                 <button id="user_map<%= contribObj[map].id %>">
-                    <%= contribObj[map].name %>
+                  <%= contribObj[map].name %>
+                </button>
+                <button id="like<%= contribObj[map].id %>">
+                  Like
                 </button>
               </li>
             <% } %>
@@ -70,6 +76,9 @@
               <li>
                 <button id="user_map<%= mapsObj[map].id %>">
                   <%= mapsObj[map].name %>
+                </button>
+                <button id="like<%= mapsObj[map].id %>">
+                  Like
                 </button>
               </li>
             <% } %>

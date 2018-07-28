@@ -178,8 +178,17 @@ $(() => {
     });
   })
 
+  $("[id^=like]").click(function(event) {
+    var id_number = this.id.slice(4);
+    $.ajax({
+      method: "POST",
+      url: `/likes/${id_number}`
+    }).done(() => {
+      location.reload();
+    })
+  })
+
   $('[id^=made]').click(function(event) {
-    console.log(this.id);
     var id_number = this.id.slice(4)
     $.ajax({
       method: "GET",
@@ -189,7 +198,6 @@ $(() => {
     })
   });
   $('[id^=liked]').click(function(event) {
-    console.log(this.id);
     var id_number = this.id.slice(5)
     $.ajax({
       method: "GET",
