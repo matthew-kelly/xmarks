@@ -19,11 +19,10 @@ body {
     margin-left: auto;
     margin-right: auto;
     width: 80%
-  }
-  // .maps_table {
-    // position: absolute;
-    // left: 19em;
-    // top: em;
+  } // .maps_table {
+  // position: absolute;
+  // left: 19em;
+  // top: em;
   // }
   #table_section {
     position: relative;
@@ -33,13 +32,13 @@ body {
     right: 5.2em;
     top: 1.7em;
   }
-  .info_left{
+  .info_left {
     position: absolute;
     top: 5em;
     left: 6em;
     width: 32%;
   }
-  .info_right{
+  .info_right {
     position: absolute;
     top: 5em;
     left: 39em;
@@ -50,7 +49,7 @@ body {
     padding-left: 2em;
     padding-right: 2em;
     margin-right: 0.5em;
-    border-radius:0.4em;
+    border-radius: 0.4em;
     color: white;
   }
   .addressbook {
@@ -78,12 +77,15 @@ body {
     border-radius: 13em;
     padding: 1em;
   }
-  #pic{
+  #pic {
     width: 26em;
   }
   .username {
     display: flex;
     justify-content: center;
+    color: black;
+    text-shadow: 2px 2px #f4fff9;
+    font-weight: bold;
   }
   .login_button {
     display: flex;
@@ -103,7 +105,10 @@ body {
     justify-content: center;
     bottom: 27em;
   }
-  .name_map, .close_map, .form-group, .save_map {
+  .name_map,
+  .close_map,
+  .form-group,
+  .save_map {
     display: none;
   }
   .btn {
@@ -130,15 +135,15 @@ body {
     width: 40%;
     background-color: white;
     margin: auto;
-    overflow:hidden;
+    overflow: hidden;
   }
-  .made_button{
-    background-color:$blue;
+  .made_button {
+    background-color: $blue;
   }
-  .liked_button{
-    background-color:$red;
+  .liked_button {
+    background-color: $red;
   }
-  .contrib_button{
-    background-color:$teal;
+  .contrib_button {
+    background-color: $teal;
   }
 }

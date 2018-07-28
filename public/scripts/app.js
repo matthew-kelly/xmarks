@@ -36,11 +36,11 @@ $(() => {
     var locationArr3 = locationArr2.toString().split(',');
     console.log(locationArr3);
     var infowindow = new google.maps.InfoWindow({
-      content :'<h1>'+ title +'</h1>' +
+      content: '<h1>' + title + '</h1>' +
         '[lat, lang] : [' + locationArr3[1] + ',' + locationArr3[3] + ']' +
-        '<br><button class="btn btn-default remove-marker" data-marker-lat="'+
-        locationArr3[1] +'" data-marker-lng="'+locationArr3[3]+'">Delete marker</button>'
-      });
+        '<br><button class="btn btn-default remove-marker" data-marker-lat="' +
+        locationArr3[1] + '" data-marker-lng="' + locationArr3[3] + '">Delete marker</button>'
+    });
 
     var marker = new google.maps.Marker({
       position: location,
@@ -172,6 +172,11 @@ $(() => {
           title: pin.title,
           icon: image,
           shape: shape,
+          draggable: true,
+          dragend: function(m) {
+            console.log(marker_index);
+            console.log(m.latLng.lat())
+          }
         }));
       });
       showMarkers();
