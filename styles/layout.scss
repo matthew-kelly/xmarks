@@ -20,11 +20,11 @@ body {
     margin-right: auto;
     width: 80%
   }
-  .maps_table {
+  // .maps_table {
     // position: absolute;
     // left: 19em;
     // top: em;
-  }
+  // }
   #table_section {
     position: relative;
   }
@@ -102,6 +102,9 @@ body {
     width: auto;
     justify-content: center;
     bottom: 27em;
+  }
+  .name_map, .close_map, .form-group, .save_map {
+    display: none;
   }
   .btn {
     background-color: $teal;

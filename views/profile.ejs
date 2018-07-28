@@ -12,11 +12,12 @@
   <script type="text/javascript" src="/scripts/app.js"></script>
   <link href="https://fonts.googleapis.com/css?family=Architects+Daughter" rel="stylesheet">
   <script>
-  function play() {
-    var audio = document.getElementById("audio");
-    audio.play();
-  }
-</script>
+    function play() {
+      var audio = document.getElementById("audio");
+      audio.play();
+    }
+
+  </script>
 </head>
 
 <body>
@@ -24,7 +25,9 @@
     <div class="row">
       <div class="col-12">
         <div class="profile_background table">
-          <div id="profile_pic"><img src="../images/pirate.jpg" id="pic"></div>
+          <div id="profile_pic">
+            <img src="../images/pirate.jpg" id="pic">
+          </div>
         </div>
         <h1 class="username">
           <%= userObj.username %>
@@ -34,9 +37,9 @@
     <div id="table_section">
       <img class="addressbook" src="../images/book2.png">
       <div id="button_section">
-        <button id="made<%= userObj.user_id%>" class="tab_button made_button" onclick="play()">Made</button>
-        <button id="liked<%= userObj.user_id%>"class="tab_button liked_button" onclick="play()">Liked</button>
-        <button id="contrib<%= userObj.user_id%>"class="tab_button contrib_button" onclick="play()">Contrib</button>
+        <button id="made<%= userObj.user_id %>" class="tab_button made_button" onclick="play()">Made</button>
+        <button id="liked<%= userObj.user_id %>" class="tab_button liked_button" onclick="play()">Liked</button>
+        <button id="contrib<%= userObj.user_id %>" class="tab_button contrib_button" onclick="play()">Contributed</button>
       </div>
       <div class="row maps_table">
         <div class="table col-6 info_left">
@@ -46,13 +49,31 @@
         </div>
         <div class="table col-6 info_right">
           <ul id="map_list">
+          <% if (current_tab === "likes") { %>
+            <% for (var map in likesObj) { %>
+              <li>
+                <button id="user_map<%= likesObj[map].id %>">
+                  <%= likesObj[map].name %>
+                </button>
+              </li>
+            <% } %>
+          <% } else if (current_tab === "contrib") { %>
+            <% for (var map in contribObj) { %>
+              <li>
+                <button id="user_map<%= contribObj[map].id %>">
+                    <%= contribObj[map].name %>
+                </button>
+              </li>
+            <% } %>
+          <% } else if (current_tab === "made") { %>
             <% for (var map in mapsObj) { %>
               <li>
                 <button id="user_map<%= mapsObj[map].id %>">
                   <%= mapsObj[map].name %>
                 </button>
               </li>
-              <% } %>
+            <% } %>
+          <% } %>
           </ul>
           <button class='btn btn-danger create_map'> Create a new map</button>
         </div>
@@ -70,7 +91,7 @@
         <input name="map_name" type="text" class="form-control" id="map_name" placeholder="Ex: Ryan Reynolds sightings">
         <input name="pins_array" type="hidden">
       </div>
-      <button type="submit" class="btn btn-primary">Save Map!</button>
+      <button type="submit" class="btn btn-primary save_map">Save Map!</button>
     </form>
   </div>
   <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA3rnYZtj-7VMyBjm0Z2Qx3gYktTvZ4nqw"></script>
