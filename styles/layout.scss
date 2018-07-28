@@ -3,7 +3,9 @@
 body {
   // background-color: darken( #86AFC7, 10%);
   background-image: url('/images/body_background.jpg');
-
+  font-family: 'Architects Daughter', cursive;
+  font-size: 1.1;
+  text-shadow: 1px 0px #615555;
 
   h1 {
     color: #244751;
@@ -19,9 +21,9 @@ body {
     width: 80%
   }
   .maps_table {
-    position: absolute;
-    left: 7em;
-    top: 4em;
+    // position: absolute;
+    // left: 19em;
+    // top: em;
   }
   #table_section {
     position: relative;
@@ -31,12 +33,25 @@ body {
     right: 5.2em;
     top: 1.7em;
   }
+  .info_left{
+    position: absolute;
+    top: 5em;
+    left: 6em;
+    width: 32%;
+  }
+  .info_right{
+    position: absolute;
+    top: 5em;
+    left: 39em;
+    width: 37%;
+  }
   .tab_button {
     clip-path: polygon(15% 0, 85% 0, 100% 100%, 0% 100%);
     padding-left: 2em;
     padding-right: 2em;
     margin-right: 0.5em;
-    border-radius:0.2em;
+    border-radius:0.4em;
+    color: white;
   }
   .addressbook {
     background-image: url('/images/address_background.jpeg'); // background-color: $orange;
@@ -49,8 +64,7 @@ body {
     overflow: hidden;
     height: 45em;
     width: 88%;
-    // border-radius: 2.3em;
-    // border: 2px solid black;
+    border-radius: 2.3em;
     position: absolute;
     right: 6%;
     top: 2em;
@@ -63,6 +77,9 @@ body {
     background-color: steelblue;
     border-radius: 13em;
     padding: 1em;
+  }
+  #pic{
+    width: 26em;
   }
   .username {
     display: flex;
@@ -84,6 +101,7 @@ body {
     position: relative;
     width: auto;
     justify-content: center;
+    bottom: 27em;
   }
   .btn {
     background-color: $teal;
@@ -109,5 +127,15 @@ body {
     width: 40%;
     background-color: white;
     margin: auto;
+    overflow:hidden;
+  }
+  .made_button{
+    background-color:$blue;
+  }
+  .liked_button{
+    background-color:$red;
+  }
+  .contrib_button{
+    background-color:$teal;
   }
 }

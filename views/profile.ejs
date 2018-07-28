@@ -10,6 +10,13 @@
   <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
   <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
   <script type="text/javascript" src="/scripts/app.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Architects+Daughter" rel="stylesheet">
+  <script>
+  function play() {
+    var audio = document.getElementById("audio");
+    audio.play();
+  }
+</script>
 </head>
 
 <body>
@@ -17,7 +24,7 @@
     <div class="row">
       <div class="col-12">
         <div class="profile_background table">
-          <div id="profile_pic"></div>
+          <div id="profile_pic"><img src="../images/pirate.jpg" id="pic"></div>
         </div>
         <h1 class="username">
           <%= userObj.username %>
@@ -25,20 +32,20 @@
       </div>
     </div>
     <div id="table_section">
-      <img class="addressbook" src="../images/collage.png">
+      <img class="addressbook" src="../images/book2.png">
       <div id="button_section">
-        <button class="tab_button">Made</button>
-        <button class="tab_button">Liked</button>
-        <button class="tab_button">Contrib</button>
+        <button id="made<%= userObj.user_id%>" class="tab_button made_button" onclick="play()">Made</button>
+        <button id="liked<%= userObj.user_id%>"class="tab_button liked_button" onclick="play()">Liked</button>
+        <button id="contrib<%= userObj.user_id%>"class="tab_button contrib_button" onclick="play()">Contrib</button>
       </div>
       <div class="row maps_table">
-        <div class="table col-6">
+        <div class="table col-6 info_left">
           <p>
             <%= userObj.description %>
           </p>
         </div>
-        <div class="table col-6">
-          <ul>
+        <div class="table col-6 info_right">
+          <ul id="map_list">
             <% for (var map in mapsObj) { %>
               <li>
                 <button id="user_map<%= mapsObj[map].id %>">
@@ -67,6 +74,7 @@
     </form>
   </div>
   <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA3rnYZtj-7VMyBjm0Z2Qx3gYktTvZ4nqw"></script>
+  <audio id="audio" src="/images/page.mp3"></audio>
 </body>
 
 </html>
