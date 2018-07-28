@@ -10,6 +10,7 @@ $(() => {
   $('#name_map_group').hide();
 
   // Adds a marker to the map and pushes to the markers array.
+<<<<<<< Updated upstream
   function addMarker(location, title, map1) {
     var image = {
       url: '../images/xmark.png',
@@ -31,6 +32,13 @@ $(() => {
       title: title,
       icon: image,
       shape: shape,
+=======
+  function addMarker(location, creator, title, map1) {
+    var marker = new google.maps.Marker({
+      position: location,
+      map: map1,
+      title: `${creator}: ${title}`
+>>>>>>> Stashed changes
     });
     var innerObj = {};
     innerObj.title = marker.title;
