@@ -26,6 +26,7 @@ exports.up = function (knex, Promise) {
       table.text('description');
       table.string('latitude');
       table.string('longitude');
+      table.integer('delete_id');
       table.integer('user_id').references('users.id');
       table.integer('map_id').references('maps.id');
     })

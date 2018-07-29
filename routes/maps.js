@@ -36,6 +36,24 @@ module.exports = (knex) => {
       .catch(e => console.error(e))
   })
 
+  router.get("/", (req, res) => {
+    let templateVars = {};
+    knex.select("*")
+      .from("maps")
+      .then((rows) => {
+        let MapsObj = {};
+        for (let i = 0; i < rows.length; i++) {
+          let newMap = {};
+          newMap.id = rows[i].id;
+          newMap.name = rows[i].name;
+          MapsObj[newMap.id] = newMap;
+        }
+        templateVars.MapsObj = MapsObj;
+        res.status(200).render("allmaps", templateVars);
+      })
+      .catch(e => console.error(e))
+  })
+
   // Add new map and pins to database
   router.post("/", (req, res) => {
     const pinsArray = JSON.parse(req.body.pins_array);
@@ -54,6 +72,7 @@ module.exports = (knex) => {
             description: pin.description,
             latitude: pin.latitude,
             longitude: pin.longitude,
+            delete_id: pin.delete_id,
             user_id: req.cookies.user_id,
             map_id: mapID
           }).then();

@@ -119,6 +119,5 @@ module.exports = (knex) => {
     res.redirect(`/users/${user_id}`);
   })
 
-
   return router;
 }
