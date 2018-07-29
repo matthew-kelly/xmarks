@@ -1,12 +1,10 @@
 @import 'variables';
-
 body {
   // background-color: darken( #86AFC7, 10%);
   background-image: url('/images/body_background.jpg');
   font-family: 'Architects Daughter', cursive;
   font-size: 1.1;
   text-shadow: 1px 0px #615555;
-
   h1 {
     color: #244751;
   }
@@ -106,15 +104,20 @@ body {
     bottom: 27em;
   }
   .name_map,
+  .update_map,
   .close_map,
   .form-group,
   .save_map {
     display: none;
+    &:disabled {
+      color: #fff;
+      border-color: #a0a0a0;
+      background-color: #a0a0a0;
+    }
   }
   .btn {
     background-color: $teal;
   }
-
   #name_map_group {
     background-color: $teal;
     border-radius: 10px;

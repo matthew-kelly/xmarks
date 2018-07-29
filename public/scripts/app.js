@@ -6,6 +6,7 @@ $(() => {
   // on document load hides the map/map buttons/ and the name map form
   $('#map').hide();
   $('.name_map').hide();
+  $('.update_map').hide();
   $('.close_map').hide();
   $('.form-group').hide();
   $('.save_map').hide();
@@ -109,7 +110,8 @@ $(() => {
   $('.create_map').click(function(event) {
     event.preventDefault();
     $('#map').show('fast');
-    $('.name_map').show('fast');
+    $('.name_map').prop('disabled', null).show('fast');
+    $('.update_map').prop('disabled', 'true').show('fast');
     $('.close_map').show('fast');
 
     if (google && google.maps && google.maps.Map) {
@@ -159,7 +161,8 @@ $(() => {
 
     addEventListener(map);
     $('#map').show('fast');
-    $('.name_map').show('fast');
+    $('.name_map').prop('disabled', 'true').show('fast');
+    $('.update_map').prop('disabled', null).show('fast');
     $('.close_map').show('fast');
     $.ajax({
       method: "GET",
@@ -260,6 +263,7 @@ $(() => {
   $('.close_map').click(function(event) {
     $('#map').hide('fast');
     $('.name_map').hide('fast');
+    $('.update_map').hide('fast');
     $('.close_map').hide('fast');
     $('.form-group').hide('fast');
     $('.save_map').hide('fast');

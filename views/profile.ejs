@@ -35,7 +35,7 @@
       </div>
     </div>
     <div id="table_section">
-      <img class="addressbook" src="../images/book2.png">
+      <img class="addressbook" src="../images/map_book.png">
       <div id="button_section">
         <button id="made<%= userObj.user_id %>" class="tab_button made_button" onclick="play()">Made</button>
         <button id="liked<%= userObj.user_id %>" class="tab_button liked_button" onclick="play()">Liked</button>
@@ -91,12 +91,13 @@
     <!-- <img src= /public/images/redx.png> -->
     <div class="mapdiv" id='map'></div>
     <div class=map_buttons>
-      <button class='btn btn-primary name_map'>Name this map</button>
+      <button class='btn btn-primary name_map'>Save a New Map</button>
+      <button class='btn btn-primary update_map'>Update Map</button>
       <button class='btn btn-primary close_map'>Close Map</button>
     </div>
     <form method="POST" action="/maps" id="name_map_group">
       <div class="form-group">
-        <label class="new_map_header" for="map_name">Enter a map name</label>
+        <label class="new_map_header" for="map_name">Enter a map name:</label>
         <input name="map_name" type="text" class="form-control" id="map_name" placeholder="Ex: Ryan Reynolds sightings">
         <input name="pins_array" type="hidden">
       </div>
