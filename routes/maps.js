@@ -39,6 +39,7 @@ module.exports = (knex) => {
   // Add new map and pins to database
   router.post("/", (req, res) => {
     const pinsArray = JSON.parse(req.body.pins_array);
+    console.log(pinsArray)
     knex("maps").insert({
         name: req.body.map_name,
         latitude_center: "49.2827",
@@ -50,6 +51,7 @@ module.exports = (knex) => {
         pinsArray.forEach((pin) => {
           knex("pins").insert({
             title: pin.title,
+            description: pin.description,
             latitude: pin.latitude,
             longitude: pin.longitude,
             user_id: req.cookies.user_id,

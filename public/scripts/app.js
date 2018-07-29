@@ -61,6 +61,7 @@ $(() => {
 
     var innerObj = {};
     innerObj.title = marker.title;
+    innerObj.description = marker.description;
     innerObj.latitude = marker.getPosition().lat();
     innerObj.longitude = marker.getPosition().lng();
     markerArr.push(innerObj);
@@ -72,7 +73,7 @@ $(() => {
     map.addListener('click', function(event) {
       var title = window.prompt("name this title");
       var description = window.prompt("describe this place");
-      if (title) {
+      if (title && description) {
         addMarker(event.latLng, title, map, description);
         $("input[name='pins_array']").val("");
         $("input[name='pins_array']").val(JSON.stringify(markerArr));
@@ -172,6 +173,7 @@ $(() => {
           },
           map: map,
           title: pin.title,
+          description: pin.description,
           icon: image,
           shape: shape,
           draggable: true,
@@ -181,7 +183,7 @@ $(() => {
           }
         })
         var infowindow = new google.maps.InfoWindow({
-          content: '<h1>' + pin.title + '</h1>'
+          content: '<h1>' + pin.title + '</h1>' + '<p>' + pin.description + '</p>'
         });
         marker.addListener('click', function() {
           infowindow.open(map, marker);

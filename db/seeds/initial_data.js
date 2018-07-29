@@ -12,7 +12,7 @@ exports.seed = function (knex, Promise) {
     .then(() => {
       return knex('users').insert({
         username: 'Mark',
-        description: 'I love coffee and Ryan Reynolds!',
+        bio: 'I love coffee and Ryan Reynolds!',
         email: 'mark@mark.com',
         password: 'mark',
         color: '#ffff00'
@@ -21,7 +21,7 @@ exports.seed = function (knex, Promise) {
     .then(() => {
       return knex('users').insert({
         username: 'Lisa',
-        description: 'I love coffee, but Ryan Reynolds is just okay.',
+        bio: 'I love coffee, but Ryan Reynolds is just okay.',
         email: 'lisa@lisa.com',
         password: 'lisa',
         color: '#ff00ff'
@@ -58,6 +58,7 @@ exports.seed = function (knex, Promise) {
     .then(() => {
       return knex('pins').insert({
         title: 'starbucks',
+        description: 'I had a frappa here once',
         latitude: '49.2827',
         longitude: '-123.1207',
         user_id: 1,
@@ -67,6 +68,7 @@ exports.seed = function (knex, Promise) {
     .then(() => {
       return knex('pins').insert({
         title: 'tim hortons',
+        description: 'I had a pupperchino',
         latitude: '49.2825',
         longitude: '-123.1214',
         user_id: 2,
@@ -76,6 +78,7 @@ exports.seed = function (knex, Promise) {
     .then(() => {
       return knex('pins').insert({
         title: 'starbucks, again',
+        description: 'Saw a cute poodle',
         latitude: '49.2827',
         longitude: '-123.1207',
         user_id: 2,

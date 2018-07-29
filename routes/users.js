@@ -41,7 +41,7 @@ module.exports = (knex) => {
         let userObj = {};
         userObj.user_id = rows[0].user_id;
         userObj.username = rows[0].username;
-        userObj.description = rows[0].description;
+        userObj.bio = rows[0].bio;
         userObj.email = rows[0].email;
         userObj.password = rows[0].password;
         userObj.color = rows[0].color;
@@ -96,7 +96,7 @@ module.exports = (knex) => {
 
       Promise.all([madeMapsPromise, likedMapsPromise, contribMapsPromise])
       .then(() => {
-        console.log("TEMPLATE VARS: ", templateVars);
+        // console.log("TEMPLATE VARS: ", templateVars);
         res.status(200).render("profile", templateVars);
       })
       .catch(e => console.error(e))

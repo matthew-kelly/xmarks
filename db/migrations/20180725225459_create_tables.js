@@ -3,7 +3,7 @@ exports.up = function (knex, Promise) {
     knex.schema.createTable('users', function (table) {
       table.increments('id');
       table.string('username');
-      table.text('description');
+      table.text('bio');
       table.string('email');
       table.string('password');
       table.string('color');
@@ -23,6 +23,7 @@ exports.up = function (knex, Promise) {
     knex.schema.createTable('pins', function (table) {
       table.increments('id');
       table.string('title');
+      table.text('description');
       table.string('latitude');
       table.string('longitude');
       table.integer('user_id').references('users.id');
