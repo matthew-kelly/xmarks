@@ -3,6 +3,8 @@ $(() => {
 
   var markers = [];
   var markerArr = [];
+  var uniqueID = 500;
+
   // on document load hides the map/map buttons/ and the name map form
   $('#map').hide();
   $('.name_map').hide();
@@ -15,7 +17,7 @@ $(() => {
     console.log(location);
     var image = {
       url: '../images/xmark.png',
-      // This marker is 20 pixels wide by 32 pixels high.
+      // This marker is 30 pixels wide by 32 pixels high.
       size: new google.maps.Size(30, 32),
       // The origin for this image is (0, 0).
       origin: new google.maps.Point(0, 0),
@@ -27,19 +29,8 @@ $(() => {
       type: 'poly'
     };
 
-    // IF ITS STUPID AND IT WORKS IT'S NOT STUPID
-    // var locationObj = JSON.stringify(location);
-    // locationObj.replace(/"{"lat":/g, "").replace(/""lng":/g, "").replace(/}/g, "")
-    // console.log(locationObj)
-    // var locationArr1 = locationObj.split(':')
-    // var locationArr2 = locationArr1.toString().split('}');
-    // var locationArr3 = locationArr2.toString().split(',');
-    // console.log(locationArr3);
     var infowindow = new google.maps.InfoWindow({
       content: '<h1>' + title + '</h1>' + '<p>' + description + '</p>'
-        // '[lat, lang] : [' + locationArr3[1] + ',' + locationArr3[3] + ']' +
-        // '<br><button class="btn btn-default remove-marker" data-marker-lat="' +
-        // locationArr3[1] + '" data-marker-lng="' + locationArr3[3] + '">Delete marker</button>'
     });
 
     var marker = new google.maps.Marker({
@@ -49,12 +40,15 @@ $(() => {
       description: description,
       icon: image,
       shape: shape,
+      delete_id: uniqueID,
       draggable: true,
       dragend: function(m) {
         console.log(marker_index);
         console.log(m.latLng.lat())
       }
     });
+
+    uniqueID++;
     marker.addListener('click', function() {
       infowindow.open(map, marker);
     });
@@ -64,8 +58,26 @@ $(() => {
     innerObj.description = marker.description;
     innerObj.latitude = marker.getPosition().lat();
     innerObj.longitude = marker.getPosition().lng();
+    innerObj.delete_id = marker.delete_id
     markerArr.push(innerObj);
     markers.push(marker);
+
+    marker.addListener('dblclick', function() {
+      console.log(markerArr);
+      for (var i = 0; i < markers.length; i++) {
+        if (markers[i].delete_id == marker.delete_id) {
+          //Remove the marker from Map
+          markers[i].setMap(null);
+
+          //Remove the marker from array.
+          markers.splice(i, 1);
+          markerArr.splice(i, 1);
+          $("input[name='pins_array']").val("");
+          $("input[name='pins_array']").val(JSON.stringify(markerArr));
+          return;
+        }
+      }
+    });
   }
 
   // Adds event listener to add pins with titles
@@ -106,7 +118,7 @@ $(() => {
   }
 
   // Initializes the Map
-  $('.create_map').click(function(event) {
+  $('#compass').click(function(event) {
     event.preventDefault();
     $('#map').show('fast');
     $('.name_map').show('fast');
@@ -121,6 +133,8 @@ $(() => {
         document.getElementById('map'), {
           center: Van,
           zoom: 15,
+          disableDefaultUI: true,
+          styles: [{ "elementType": "geometry", "stylers": [{ "color": "#e7e1cb" }] }, { "elementType": "labels.text.fill", "stylers": [{ "color": "#523735" }] }, { "elementType": "labels.text.stroke", "stylers": [{ "color": "#f5f1e6" }] }, { "featureType": "administrative", "elementType": "geometry.stroke", "stylers": [{ "color": "#c9b2a6" }] }, { "featureType": "administrative.country", "stylers": [{ "color": "#f90000" }, { "visibility": "on" }] }, { "featureType": "administrative.land_parcel", "stylers": [{ "visibility": "off" }] }, { "featureType": "administrative.land_parcel", "elementType": "geometry.stroke", "stylers": [{ "color": "#dcd2be" }] }, { "featureType": "administrative.land_parcel", "elementType": "labels.text.fill", "stylers": [{ "color": "#ae9e90" }] }, { "featureType": "administrative.neighborhood", "stylers": [{ "visibility": "off" }] }, { "featureType": "landscape.man_made", "elementType": "geometry.stroke", "stylers": [{ "visibility": "off" }] }, { "featureType": "landscape.natural", "elementType": "geometry", "stylers": [{ "color": "#d7bd98" }] }, { "featureType": "poi", "stylers": [{ "visibility": "off" }] }, { "featureType": "poi", "elementType": "geometry", "stylers": [{ "color": "#dfd2ae" }] }, { "featureType": "poi", "elementType": "labels.text.fill", "stylers": [{ "color": "#93817c" }, { "weight": 1 }] }, { "featureType": "poi.attraction", "stylers": [{ "visibility": "off" }] }, { "featureType": "poi.business", "stylers": [{ "visibility": "off" }] }, { "featureType": "poi.business", "elementType": "geometry", "stylers": [{ "visibility": "off" }] }, { "featureType": "poi.government", "stylers": [{ "visibility": "off" }] }, { "featureType": "poi.government", "elementType": "geometry", "stylers": [{ "color": "#f31818" }] }, { "featureType": "poi.park", "stylers": [{ "visibility": "on" }] }, { "featureType": "poi.park", "elementType": "geometry.fill", "stylers": [{ "color": "#dbbd7b" }] }, { "featureType": "poi.park", "elementType": "geometry.stroke", "stylers": [{ "weight": 3.5 }] }, { "featureType": "poi.park", "elementType": "labels.icon", "stylers": [{ "visibility": "off" }] }, { "featureType": "poi.park", "elementType": "labels.text.fill", "stylers": [{ "color": "#353833" }] }, { "featureType": "road", "elementType": "geometry", "stylers": [{ "color": "#f5f1e6" }] }, { "featureType": "road", "elementType": "labels.icon", "stylers": [{ "visibility": "off" }] }, { "featureType": "road.arterial", "elementType": "geometry", "stylers": [{ "color": "#fdfcf8" }] }, { "featureType": "road.highway", "elementType": "geometry", "stylers": [{ "weight": 1.5 }] }, { "featureType": "road.highway.controlled_access", "elementType": "geometry", "stylers": [{ "color": "#db8555" }, { "weight": 1.5 }] }, { "featureType": "road.highway.controlled_access", "elementType": "geometry.stroke", "stylers": [{ "color": "#db8555" }] }, { "featureType": "road.local", "elementType": "labels.text.fill", "stylers": [{ "color": "#806b63" }] }, { "featureType": "transit", "stylers": [{ "visibility": "off" }] }, { "featureType": "transit.line", "elementType": "geometry", "stylers": [{ "color": "#dfd2ae" }] }, { "featureType": "transit.line", "elementType": "labels.text.fill", "stylers": [{ "color": "#8f7d77" }] }, { "featureType": "transit.line", "elementType": "labels.text.stroke", "stylers": [{ "color": "#ebe3cd" }] }, { "featureType": "transit.station", "elementType": "geometry", "stylers": [{ "color": "#dfd2ae" }] }, { "featureType": "water", "elementType": "geometry", "stylers": [{ "color": "#ecb028" }] }, { "featureType": "water", "elementType": "geometry.fill", "stylers": [{ "color": "#719dce" }] }, { "featureType": "water", "elementType": "labels.text.fill", "stylers": [{ "color": "#92998d" }] }]
         }
       );
       // This event listener will call addMarker() when the map is clicked.
@@ -141,6 +155,8 @@ $(() => {
       document.getElementById('map'), {
         center: Van,
         zoom: 15,
+        disableDefaultUI: true,
+        styles: [{ "elementType": "geometry", "stylers": [{ "color": "#e7e1cb" }] }, { "elementType": "labels.text.fill", "stylers": [{ "color": "#523735" }] }, { "elementType": "labels.text.stroke", "stylers": [{ "color": "#f5f1e6" }] }, { "featureType": "administrative", "elementType": "geometry.stroke", "stylers": [{ "color": "#c9b2a6" }] }, { "featureType": "administrative.country", "stylers": [{ "color": "#f90000" }, { "visibility": "on" }] }, { "featureType": "administrative.land_parcel", "stylers": [{ "visibility": "off" }] }, { "featureType": "administrative.land_parcel", "elementType": "geometry.stroke", "stylers": [{ "color": "#dcd2be" }] }, { "featureType": "administrative.land_parcel", "elementType": "labels.text.fill", "stylers": [{ "color": "#ae9e90" }] }, { "featureType": "administrative.neighborhood", "stylers": [{ "visibility": "off" }] }, { "featureType": "landscape.man_made", "elementType": "geometry.stroke", "stylers": [{ "visibility": "off" }] }, { "featureType": "landscape.natural", "elementType": "geometry", "stylers": [{ "color": "#d7bd98" }] }, { "featureType": "poi", "stylers": [{ "visibility": "off" }] }, { "featureType": "poi", "elementType": "geometry", "stylers": [{ "color": "#dfd2ae" }] }, { "featureType": "poi", "elementType": "labels.text.fill", "stylers": [{ "color": "#93817c" }, { "weight": 1 }] }, { "featureType": "poi.attraction", "stylers": [{ "visibility": "off" }] }, { "featureType": "poi.business", "stylers": [{ "visibility": "off" }] }, { "featureType": "poi.business", "elementType": "geometry", "stylers": [{ "visibility": "off" }] }, { "featureType": "poi.government", "stylers": [{ "visibility": "off" }] }, { "featureType": "poi.government", "elementType": "geometry", "stylers": [{ "color": "#f31818" }] }, { "featureType": "poi.park", "stylers": [{ "visibility": "on" }] }, { "featureType": "poi.park", "elementType": "geometry.fill", "stylers": [{ "color": "#dbbd7b" }] }, { "featureType": "poi.park", "elementType": "geometry.stroke", "stylers": [{ "weight": 3.5 }] }, { "featureType": "poi.park", "elementType": "labels.icon", "stylers": [{ "visibility": "off" }] }, { "featureType": "poi.park", "elementType": "labels.text.fill", "stylers": [{ "color": "#353833" }] }, { "featureType": "road", "elementType": "geometry", "stylers": [{ "color": "#f5f1e6" }] }, { "featureType": "road", "elementType": "labels.icon", "stylers": [{ "visibility": "off" }] }, { "featureType": "road.arterial", "elementType": "geometry", "stylers": [{ "color": "#fdfcf8" }] }, { "featureType": "road.highway", "elementType": "geometry", "stylers": [{ "weight": 1.5 }] }, { "featureType": "road.highway.controlled_access", "elementType": "geometry", "stylers": [{ "color": "#db8555" }, { "weight": 1.5 }] }, { "featureType": "road.highway.controlled_access", "elementType": "geometry.stroke", "stylers": [{ "color": "#db8555" }] }, { "featureType": "road.local", "elementType": "labels.text.fill", "stylers": [{ "color": "#806b63" }] }, { "featureType": "transit", "stylers": [{ "visibility": "off" }] }, { "featureType": "transit.line", "elementType": "geometry", "stylers": [{ "color": "#dfd2ae" }] }, { "featureType": "transit.line", "elementType": "labels.text.fill", "stylers": [{ "color": "#8f7d77" }] }, { "featureType": "transit.line", "elementType": "labels.text.stroke", "stylers": [{ "color": "#ebe3cd" }] }, { "featureType": "transit.station", "elementType": "geometry", "stylers": [{ "color": "#dfd2ae" }] }, { "featureType": "water", "elementType": "geometry", "stylers": [{ "color": "#ecb028" }] }, { "featureType": "water", "elementType": "geometry.fill", "stylers": [{ "color": "#719dce" }] }, { "featureType": "water", "elementType": "labels.text.fill", "stylers": [{ "color": "#92998d" }] }]
       }
     );
     var image = {
@@ -157,6 +173,12 @@ $(() => {
       type: 'poly'
     };
 
+$('#globe').click(function(event){
+  $.ajax({
+      method: "GET",
+      url: `/maps`
+    }).done((maps) => {});
+})
     addEventListener(map);
     $('#map').show('fast');
     $('.name_map').show('fast');
@@ -166,6 +188,7 @@ $(() => {
       url: `/maps/${id_number}`
     }).done((pins) => {
       pins.forEach(function(pin) {
+
         var marker = new google.maps.Marker({
           position: {
             lat: Number(pin.latitude),
@@ -176,12 +199,14 @@ $(() => {
           description: pin.description,
           icon: image,
           shape: shape,
+          delete_id: pin.delete_id,
           draggable: true,
           dragend: function(m) {
             console.log(marker_index);
             console.log(m.latLng.lat())
           }
         })
+
         var infowindow = new google.maps.InfoWindow({
           content: '<h1>' + pin.title + '</h1>' + '<p>' + pin.description + '</p>'
         });
@@ -189,6 +214,23 @@ $(() => {
           infowindow.open(map, marker);
         });
         markers.push(marker);
+
+        marker.addListener('dblclick', function() {
+          console.log(this);
+          for (var i = 0; i < markers.length; i++) {
+            if (markers[i].delete_id == marker.delete_id) {
+              //Remove the marker from Map
+              markers[i].setMap(null);
+
+              //Remove the marker from array.
+              markers.splice(i, 1);
+              markerArr.splice(i, 1);
+              $("input[name='pins_array']").val("");
+              $("input[name='pins_array']").val(JSON.stringify(markerArr));
+              return;
+            }
+          }
+        });
       });
       showMarkers();
     });
@@ -240,22 +282,6 @@ $(() => {
     $('#map_name').focus();
   })
 
-  // $('.mapdiv').click('div.gmnoprint .remove-marker', function(event) {
-  //   console.log($(this));
-  //   event.preventDefault();
-  //   // var lat = $(this).data("marker-lat");
-  //   // var lng = $(this).data("marker-lng");
-  //   // console.log("deleting marker ", lat, lng);
-  //   $.each(map.markers, function(index, marker) {
-  //   //   var m_lat = marker.getPosition().lat();
-  //   //   var m_lng = marker.getPosition().lng();
-  //   //   if (m_lat == lat && m_lng == lng) {
-  //     map.removeMarker(map.markers[index]);
-  //     // return false;
-  //     // }
-  //   });
-  // });
-
   // closes map and clears all markers from markerarray.
   $('.close_map').click(function(event) {
     $('#map').hide('fast');
@@ -269,5 +295,4 @@ $(() => {
   $('#name_map_group').submit(function(event) {
     var map_name = $('#map_name').value;
   })
-
 });

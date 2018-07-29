@@ -3,7 +3,7 @@
 body {
   // background-color: darken( #86AFC7, 10%);
   background-image: url('/images/body_background.jpg');
-  font-family: 'Architects Daughter', cursive;
+  font-family: 'Ubuntu Condensed', sans-serif;
   font-size: 1.1;
   text-shadow: 1px 0px #615555;
 
@@ -16,6 +16,7 @@ body {
     height: 100%;
     background-size: contain;
     padding-top: 2em;
+    padding-bottom: 2em;
     margin-left: auto;
     margin-right: auto;
     width: 80%
@@ -27,10 +28,73 @@ body {
   #table_section {
     position: relative;
   }
+  .nav_buttons:hover {
+    cursor: pointer;
+  }
+  .list_item {
+    font-size: 1.2em;
+  }
+  .list_item:hover {
+    cursor: pointer;
+  }
+  .list_row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+  .like_button {
+    width: 30px;
+    height: 30px;
+  }
+  .like_button:hover {
+    cursor: pointer;
+  }
+  .like_area {
+    display: flex;
+  }
+  .map_board{
+    display:flex;
+    justify-content:center;
+  }
+  #list_of_all_maps {
+    height: -webkit-fill-available;
+    width: 60%;
+    background-color: wheat;
+    border-radius: 50% 4% / 10% 1%;
+    border: 2px double black;
+    padding-top: 3em;
+    display: flex;
+    justify-content: center;
+  }
+  .nav_buttons {
+    box-shadow: 1px 0px 20px 4px #221f1f;
+    height: 2.4em;
+    border-radius: 3em;
+    font-size: 3em;
+    width: 2.4;
+    position: fixed;
+    padding: 3px;
+    border: 5px double white;
+  }
+  #compass {
+    background-color: #b1d2d6;
+    bottom: 0.5em;
+    right: 0.5em;
+  }
+  #profile_button{
+    background-color: #b1d2d6;
+    bottom: 0.5em;
+    right: 0.5em;
+  }
+  #globe {
+    background-color: #70afe8;
+    bottom: 3.5em;
+    right: 0.5em;
+  }
   #button_section {
     position: absolute;
     right: 5.2em;
-    top: 1.7em;
+    top: -0.1em;
   }
   .info_left {
     position: absolute;
@@ -86,6 +150,7 @@ body {
     color: black;
     text-shadow: 2px 2px #f4fff9;
     font-weight: bold;
+    font-family: 'New Rocker', cursive;
   }
   .login_button {
     display: flex;
@@ -104,6 +169,7 @@ body {
     width: auto;
     justify-content: center;
     bottom: 27em;
+    z-index: 999;
   }
   .name_map,
   .close_map,

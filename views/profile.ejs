@@ -10,13 +10,12 @@
   <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
   <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
   <script type="text/javascript" src="/scripts/app.js"></script>
-  <link href="https://fonts.googleapis.com/css?family=Architects+Daughter" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Ubuntu+Condensed|New+Rocker" rel="stylesheet">
   <script>
     function play() {
       var audio = document.getElementById("audio");
       audio.play();
     }
-
   </script>
 </head>
 
@@ -30,7 +29,7 @@
           </div>
         </div>
         <h1 class="username">
-          <%= userObj.username %>
+          Cap'n <%= userObj.username %>
         </h1>
       </div>
     </div>
@@ -51,40 +50,44 @@
           <ul id="map_list">
           <% if (current_tab === "likes") { %>
             <% for (var map in likesObj) { %>
-              <li>
-                <button id="user_map<%= likesObj[map].id %>">
+              <li class="list_row">
+                <p class="list_item"id="user_map<%= likesObj[map].id %>">
                   <%= likesObj[map].name %>
-                </button>
-                <button id="like<%= likesObj[map].id %>">
-                  Like
-                </button>
+                </p>
+                <div class="like_area">
+                <img class="like_button" src="/images/treasure-chest.png" id="like<%= likesObj[map].id %>">
+                  <p>Like</p>
+                </div>
               </li>
             <% } %>
           <% } else if (current_tab === "contrib") { %>
             <% for (var map in contribObj) { %>
-              <li>
-                <button id="user_map<%= contribObj[map].id %>">
+              <li class="list_row">
+                <p class="list_item"id="user_map<%= contribObj[map].id %>">
                   <%= contribObj[map].name %>
-                </button>
-                <button id="like<%= contribObj[map].id %>">
-                  Like
-                </button>
+                </p>
+                <div class="like_area">
+                <img class="like_button" src="/images/treasure-chest.png" id="like<%= contribObj[map].id %>">
+                  <p>Like</p>
+                </div>
               </li>
             <% } %>
           <% } else if (current_tab === "made") { %>
             <% for (var map in mapsObj) { %>
-              <li>
-                <button id="user_map<%= mapsObj[map].id %>">
+              <li class="list_row">
+                <p class="list_item" id="user_map<%= mapsObj[map].id %>">
                   <%= mapsObj[map].name %>
-                </button>
-                <button id="like<%= mapsObj[map].id %>">
-                  Like
-                </button>
+                </p>
+                <div class="like_area">
+                <img class="like_button" src="/images/treasure-chest.png" id="like<%= mapsObj[map].id %>">
+                  <p>Like</p>
+                </div>
               </li>
             <% } %>
           <% } %>
           </ul>
-          <button class='btn btn-danger create_map'> Create a new map</button>
+          <img src="/images/compass.png" id="compass" class="nav_buttons">
+          <a href="/maps"><img src="/images/globe.png" id="globe" method="GET" action="/maps" class="nav_buttons"></a>
         </div>
       </div>
     </div>

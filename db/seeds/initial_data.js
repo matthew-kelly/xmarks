@@ -61,6 +61,7 @@ exports.seed = function (knex, Promise) {
         description: 'I had a frappa here once',
         latitude: '49.2827',
         longitude: '-123.1207',
+        delete_id: 997,
         user_id: 1,
         map_id: 1
       });
@@ -71,6 +72,7 @@ exports.seed = function (knex, Promise) {
         description: 'I had a pupperchino',
         latitude: '49.2825',
         longitude: '-123.1214',
+        delete_id: 998,
         user_id: 2,
         map_id: 1
       });
@@ -81,6 +83,7 @@ exports.seed = function (knex, Promise) {
         description: 'Saw a cute poodle',
         latitude: '49.2827',
         longitude: '-123.1207',
+        delete_id: 999,
         user_id: 2,
         map_id: 2
       });
