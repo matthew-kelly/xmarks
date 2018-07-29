@@ -38,9 +38,9 @@ $(() => {
     // console.log(locationArr3);
     var infowindow = new google.maps.InfoWindow({
       content: '<h1>' + title + '</h1>' + '<p>' + description + '</p>'
-        // '[lat, lang] : [' + locationArr3[1] + ',' + locationArr3[3] + ']' +
-        // '<br><button class="btn btn-default remove-marker" data-marker-lat="' +
-        // locationArr3[1] + '" data-marker-lng="' + locationArr3[3] + '">Delete marker</button>'
+      // '[lat, lang] : [' + locationArr3[1] + ',' + locationArr3[3] + ']' +
+      // '<br><button class="btn btn-default remove-marker" data-marker-lat="' +
+      // locationArr3[1] + '" data-marker-lng="' + locationArr3[3] + '">Delete marker</button>'
     });
 
     var marker = new google.maps.Marker({
@@ -51,12 +51,12 @@ $(() => {
       icon: image,
       shape: shape,
       draggable: true,
-      dragend: function(m) {
+      dragend: function (m) {
         console.log(marker_index);
-        console.log(m.latLng.lat())
+        console.log(m.latLng.lat());
       }
     });
-    marker.addListener('click', function() {
+    marker.addListener('click', function () {
       infowindow.open(map, marker);
     });
 
@@ -71,7 +71,7 @@ $(() => {
 
   // Adds event listener to add pins with titles
   function addEventListener(map) {
-    map.addListener('click', function(event) {
+    map.addListener('click', function (event) {
       var title = window.prompt("name this title");
       var description = window.prompt("describe this place");
       if (title && description) {
@@ -107,7 +107,7 @@ $(() => {
   }
 
   // Initializes the Map
-  $('.create_map').click(function(event) {
+  $('.create_map').click(function (event) {
     event.preventDefault();
     $('#map').show('fast');
     $('.name_map').prop('disabled', null).show('fast');
@@ -133,7 +133,7 @@ $(() => {
   })
 
   // AJAX call to get the data from whichever map link is clicked and populate the pins on the map
-  $("[id^=user_map]").click(function(event) {
+  $("[id^=user_map]").click(function (event) {
     var id_number = this.id.slice(8);
     var Van = {
       lat: 49.2827,
@@ -168,7 +168,7 @@ $(() => {
       method: "GET",
       url: `/maps/${id_number}`
     }).done((pins) => {
-      pins.forEach(function(pin) {
+      pins.forEach(function (pin) {
         var marker = new google.maps.Marker({
           position: {
             lat: Number(pin.latitude),
@@ -180,24 +180,32 @@ $(() => {
           icon: image,
           shape: shape,
           draggable: true,
-          dragend: function(m) {
+          dragend: function (m) {
             console.log(marker_index);
-            console.log(m.latLng.lat())
+            console.log(m.latLng.lat());
+            console.log("moved pin");
           }
         })
         var infowindow = new google.maps.InfoWindow({
           content: '<h1>' + pin.title + '</h1>' + '<p>' + pin.description + '</p>'
         });
-        marker.addListener('click', function() {
+        marker.addListener('click', function () {
           infowindow.open(map, marker);
         });
+        var innerObj = {};
+        innerObj.title = marker.title;
+        innerObj.description = marker.description;
+        innerObj.latitude = marker.getPosition().lat();
+        innerObj.longitude = marker.getPosition().lng();
+        innerObj.map_id = id_number;
+        markerArr.push(innerObj);
         markers.push(marker);
       });
       showMarkers();
     });
   })
 
-  $("[id^=like]").click(function(event) {
+  $("[id^=like]").click(function (event) {
     var id_number = this.id.slice(4);
     $.ajax({
       method: "POST",
@@ -207,16 +215,16 @@ $(() => {
     })
   })
 
-  $('[id^=made]').click(function(event) {
+  $('[id^=made]').click(function (event) {
     var id_number = this.id.slice(4)
     $.ajax({
       method: "GET",
-      url: `/users/${id_number}/made/`
+      url: `/users/${id_number}/made`
     }).done(() => {
       location.reload();
     })
   });
-  $('[id^=liked]').click(function(event) {
+  $('[id^=liked]').click(function (event) {
     var id_number = this.id.slice(5)
     $.ajax({
       method: "GET",
@@ -225,8 +233,7 @@ $(() => {
       location.reload();
     })
   });
-  $('[id^=contrib]').click(function(event) {
-    console.log(this.id);
+  $('[id^=contrib]').click(function (event) {
     var id_number = this.id.slice(7)
     $.ajax({
       method: "GET",
@@ -236,8 +243,24 @@ $(() => {
     })
   })
 
+  // // update pins only, do not create new map - DON'T DELETE ALL ORIGINAL PINS
+  // $('.update_map').click(function (event) {
+  //   $("input[name='pins_array']").val("");
+  //   $("input[name='pins_array']").val(JSON.stringify(markerArr));
+  //   var pinsArray = $("input[name='pins_array']").val();
+  //   $.ajax({
+  //     method: "POST",
+  //     url: "/maps/update",
+  //     data: {
+  //       input_pins: pinsArray
+  //     }
+  //   }).done(() => {
+  //     location.reload();
+  //   })
+  // })
+
   //When name_map button is clicked, slides the save map form into view and focuses it.
-  $('.name_map').click(function(event) {
+  $('.name_map').click(function (event) {
     $('.form-group').show('fast');
     $('.save_map').show('fast');
     $('#map_name').focus();
@@ -260,7 +283,7 @@ $(() => {
   // });
 
   // closes map and clears all markers from markerarray.
-  $('.close_map').click(function(event) {
+  $('.close_map').click(function (event) {
     $('#map').hide('fast');
     $('.name_map').hide('fast');
     $('.update_map').hide('fast');
@@ -270,7 +293,7 @@ $(() => {
     deleteMarkers();
   })
 
-  $('#name_map_group').submit(function(event) {
+  $('#name_map_group').submit(function (event) {
     var map_name = $('#map_name').value;
   })
 

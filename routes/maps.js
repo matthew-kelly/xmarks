@@ -63,5 +63,25 @@ module.exports = (knex) => {
       .catch(e => console.error(e))
   })
 
+  // router.post("/update", (req, res) => {
+  //   const pinsArray = JSON.parse(req.body.input_pins);
+  //   const map_id = pinsArray[0].map_id;
+  //   pinsArray.forEach((pin) => {
+  //     pin.map_id = map_id; // ties pin to current map
+  //     knex("pins")
+  //     .where({
+  //       map_id: pin.map_id,
+  //       title: pin.title,
+  //       description: pin.description
+  //     })
+  //     .update({
+  //       latitude: pin.latitude,
+  //       longitude: pin.longitude
+  //     })
+  //     .catch(e => console.error(e))
+  //   })
+  //   res.redirect("/users");
+  // })
+
   return router;
 }

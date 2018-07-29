@@ -96,7 +96,6 @@ module.exports = (knex) => {
 
       Promise.all([madeMapsPromise, likedMapsPromise, contribMapsPromise])
       .then(() => {
-        // console.log("TEMPLATE VARS: ", templateVars);
         res.status(200).render("profile", templateVars);
       })
       .catch(e => console.error(e))
