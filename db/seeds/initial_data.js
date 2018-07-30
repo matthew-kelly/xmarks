@@ -12,7 +12,7 @@ exports.seed = function (knex, Promise) {
     .then(() => {
       return knex('users').insert({
         username: 'Mark',
-        bio: 'I love coffee and Ryan Reynolds!',
+        bio: "Ahoy, matey! Prow scuttle parrel provost. Sail ho shrouds spirits boom mizzenmast yardarm. Pinnace holystone mizzenmast quarter crow's nest nipperkin grog yardarm hempen halter furl. Swab barque interloper chantey doubloon starboard grog black jack gangway rutters. Deadlights jack lad schooner scallywag dance the hempen jig carouser broadside cable strike colors. Bring a spring upon her cable holystone blow the man down spanker Shiver me timbers to go on account lookout wherry doubloon chase.",
         email: 'mark@mark.com',
         password: 'mark',
         color: '#ffff00'
@@ -21,7 +21,7 @@ exports.seed = function (knex, Promise) {
     .then(() => {
       return knex('users').insert({
         username: 'Lisa',
-        bio: 'I love coffee, but Ryan Reynolds is just okay.',
+        bio: "Ahoy, matey! Handsomely walk the plank pink cable. Pirate Round boatswain clap of thunder boom yardarm prow. Squiffy spike smartly holystone reef sails barkadeer parrel bring a spring upon her cable run a rig schooner. Black spot snow trysail deadlights fire ship list prow heave down aft squiffy. Lugsail Buccaneer Plate Fleet gaff warp trysail furl Nelsons folly draught spanker. Galleon Sail ho driver rum squiffy to go on account scurvy parley lugger take a caulk. Clap of thunder overhaul pirate.",
         email: 'lisa@lisa.com',
         password: 'lisa',
         color: '#ff00ff'

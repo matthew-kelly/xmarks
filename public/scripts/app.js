@@ -285,21 +285,12 @@ $('#globe').click(function(event){
     })
   })
 
-  // // update pins only, do not create new map - DON'T DELETE ALL ORIGINAL PINS
-  // $('.update_map').click(function (event) {
-  //   $("input[name='pins_array']").val("");
-  //   $("input[name='pins_array']").val(JSON.stringify(markerArr));
-  //   var pinsArray = $("input[name='pins_array']").val();
-  //   $.ajax({
-  //     method: "POST",
-  //     url: "/maps/update",
-  //     data: {
-  //       input_pins: pinsArray
-  //     }
-  //   }).done(() => {
-  //     location.reload();
-  //   })
-  // })
+  //When update_map button is clicked, slides the save map form into view and focuses it.
+  $('.update_map').click(function (event) {
+    $('.form-group').show('fast');
+    $('.save_map').show('fast');
+    $('#map_name').focus();
+  })
 
   //When name_map button is clicked, slides the save map form into view and focuses it.
   $('.name_map').click(function (event) {

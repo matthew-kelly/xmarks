@@ -25,7 +25,11 @@
       <div class="col-12">
         <div class="profile_background table">
           <div id="profile_pic">
-            <img src="../images/pirate.jpg" id="pic">
+            <% if (userObj.username == "Mark") { %>
+            <img src="../images/pirate_bg.jpg" id="pic">
+            <% } else { %>
+            <img src="../images/lisa.jpg" id="pic">
+            <% } %>
           </div>
         </div>
         <h1 class="username">
