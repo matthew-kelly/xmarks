@@ -13,106 +13,120 @@
   <link href="https://fonts.googleapis.com/css?family=Ubuntu+Condensed|New+Rocker" rel="stylesheet">
   <script>
     function play() {
-      var audio = document.getElementById("audio");
+      var audio = document.getElementById("page");
       audio.play();
     }
+
+    function play1() {
+      var audio = document.getElementById("bell");
+      audio.play();
+    }
+
+    function play2() {
+      var audio = document.getElementById("bell");
+      audio.play();
+    }
+
   </script>
 </head>
 
 <body>
   <div class="container">
+    <div id="button_section">
+      <img src="/images/booktab-made.png" id="made<%= userObj.user_id %>" class="tab_button made_button" onclick="play()">
+      <img src="/images/booktab-likes.png" id="liked<%= userObj.user_id %>" class="tab_button liked_button" onclick="play()">
+      <img src="/images/booktab-contrib.png" id="contrib<%= userObj.user_id %>" class="tab_button contrib_button" onclick="play()">
+    </div>
     <div class="row">
       <div class="col-12">
         <div class="profile_background table">
           <div id="profile_pic">
             <% if (userObj.username == "Mark") { %>
-            <img src="../images/pirate_bg.jpg" id="pic">
-            <% } else { %>
-            <img src="../images/lisa.jpg" id="pic">
-            <% } %>
+              <img src="../images/pirate_bg.jpg" id="pic">
+              <% } else { %>
+                <img src="../images/lisa.jpg" id="pic">
+                <% } %>
           </div>
         </div>
         <h1 class="username">
-          Cap'n <%= userObj.username %>
+          Cap'n
+          <%= userObj.username %>
         </h1>
       </div>
     </div>
     <div id="table_section">
       <img class="addressbook" src="../images/map_book.png">
-      <div id="button_section">
-        <button id="made<%= userObj.user_id %>" class="tab_button made_button" onclick="play()">Made</button>
-        <button id="liked<%= userObj.user_id %>" class="tab_button liked_button" onclick="play()">Liked</button>
-        <button id="contrib<%= userObj.user_id %>" class="tab_button contrib_button" onclick="play()">Contributed</button>
-      </div>
-      <div class="row maps_table">
-        <div class="table col-6 info_left">
-          <p>
-            <%= userObj.bio %>
-          </p>
-        </div>
-        <div class="table col-6 info_right">
-          <ul id="map_list">
+      <div id="pages">
+        <p id="user_bio">
+          <%= userObj.bio %>
+        </p>
+        <ul id="map_list">
           <% if (current_tab === "likes") { %>
             <% for (var map in likesObj) { %>
               <li class="list_row">
-                <p class="list_item"id="user_map<%= likesObj[map].id %>">
+                <p class="list_item" id="user_map<%= likesObj[map].id %>">
                   <%= likesObj[map].name %>
                 </p>
                 <div class="like_area">
-                <img class="like_button" src="/images/treasure-chest.png" id="like<%= likesObj[map].id %>">
+                  <img class="like_button" src="/images/treasure-chest.png" id="like<%= likesObj[map].id %>">
                   <p>Like</p>
                 </div>
               </li>
-            <% } %>
-          <% } else if (current_tab === "contrib") { %>
-            <% for (var map in contribObj) { %>
-              <li class="list_row">
-                <p class="list_item"id="user_map<%= contribObj[map].id %>">
-                  <%= contribObj[map].name %>
-                </p>
-                <div class="like_area">
-                <img class="like_button" src="/images/treasure-chest.png" id="like<%= contribObj[map].id %>">
-                  <p>Like</p>
-                </div>
-              </li>
-            <% } %>
-          <% } else if (current_tab === "made") { %>
-            <% for (var map in mapsObj) { %>
-              <li class="list_row">
-                <p class="list_item" id="user_map<%= mapsObj[map].id %>">
-                  <%= mapsObj[map].name %>
-                </p>
-                <div class="like_area">
-                <img class="like_button" src="/images/treasure-chest.png" id="like<%= mapsObj[map].id %>">
-                  <p>Like</p>
-                </div>
-              </li>
-            <% } %>
-          <% } %>
-          </ul>
-          <img src="/images/compass.png" id="compass" class="nav_buttons">
-          <a href="/maps"><img src="/images/globe.png" id="globe" method="GET" action="/maps" class="nav_buttons"></a>
-        </div>
+              <% } %>
+              <% } else if (current_tab === "contrib") { %>
+                <% for (var map in contribObj) { %>
+                <li class="list_row">
+                  <p class="list_item" id="user_map<%= contribObj[map].id %>">
+                    <%= contribObj[map].name %>
+                  </p>
+                  <div class="like_area">
+                    <img class="like_button" src="/images/treasure-chest.png" id="like<%= contribObj[map].id %>">
+                    <p>Like</p>
+                  </div>
+                </li>
+                <% } %>
+              <% } else if (current_tab === "made") { %>
+                <% for (var map in mapsObj) { %>
+                  <li class="list_row">
+                    <p class="list_item" id="user_map<%= mapsObj[map].id %>">
+                      <%= mapsObj[map].name %>
+                    </p>
+                    <div class="like_area">
+                      <img class="like_button" src="/images/treasure-chest.png" id="like<%= mapsObj[map].id %>">
+                      <p>Like</p>
+                    </div>
+                  </li>
+                  <% } %>
+              <% } %>
+        </ul>
       </div>
     </div>
-    <!-- <img src= /public/images/redx.png> -->
-    <div class="mapdiv" id="map"></div>
-    <div class=map_buttons>
-      <button class="btn btn-primary name_map">Save a New Map</button>
-      <button class="btn btn-primary update_map">Update Map</button>
-      <button class="btn btn-primary close_map">Close Map</button>
+    <div class="row maps_table">
+      <img src="/images/compass.png" id="compass" class="nav_buttons" onclick="play1()">
+      <a href="/maps">
+        <img src="/images/globe.png" id="globe" method="GET" action="/maps" class="nav_buttons" onclick="play2()">
+      </a>
     </div>
-    <form method="POST" action="/maps" id="name_map_group">
-      <div class="form-group">
-        <label class="new_map_header" for="map_name">Enter a map name:</label>
-        <input name="map_name" type="text" class="form-control" id="map_name" placeholder="Ex: Ryan Reynolds sightings">
-        <input name="pins_array" type="hidden">
-      </div>
-      <button type="submit" class="btn btn-primary save_map">Save Map!</button>
-    </form>
+  </div>
+  <div class="mapdiv" id='map'></div>
+  <div class=map_buttons>
+    <button class='btn btn-primary name_map'>Save a New Map</button>
+    <button class='btn btn-primary update_map'>Update Map</button>
+    <button class='btn btn-primary close_map'>Close Map</button>
+  </div>
+  <form method="POST" action="/maps" id="name_map_group">
+    <div class="form-group">
+      <label class="new_map_header" for="map_name">Enter a map name</label>
+      <input name="map_name" type="text" class="form-control" id="map_name" placeholder="Ex: Ryan Reynolds sightings">
+      <input name="pins_array" type="hidden">
+    </div>
+    <button type="submit" class="btn btn-primary save_map">Save Map!</button>
+  </form>
   </div>
   <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA3rnYZtj-7VMyBjm0Z2Qx3gYktTvZ4nqw"></script>
-  <audio id="audio" src="/images/page.mp3"></audio>
+  <audio id="page" src="/images/page.mp3"></audio>
+  <audio id="bell" src="/images/ship-bell.mp3"></audio>
+  <audio id="map" src="/images/drawing.mp3"></audio>
 </body>
 
 </html>

@@ -29,7 +29,7 @@ exports.seed = function (knex, Promise) {
     })
     .then(() => {
       return knex('maps').insert({
-        name: 'map1',
+        name: 'Buried Treasure',
         latitude_center: '49.2827',
         longitude_center: '-123.1207',
         user_id: 1
@@ -37,7 +37,7 @@ exports.seed = function (knex, Promise) {
     })
     .then(() => {
       return knex('maps').insert({
-        name: 'map2',
+        name: 'Hidden Gems',
         latitude_center: '49.2827',
         longitude_center: '-123.1207',
         user_id: 2
@@ -57,8 +57,8 @@ exports.seed = function (knex, Promise) {
     })
     .then(() => {
       return knex('pins').insert({
-        title: 'starbucks',
-        description: 'I had a frappa here once',
+        title: 'Treasure chest full of gold?',
+        description: "I'm sure I left it around here.",
         latitude: '49.2827',
         longitude: '-123.1207',
         delete_id: 997,
@@ -68,10 +68,10 @@ exports.seed = function (knex, Promise) {
     })
     .then(() => {
       return knex('pins').insert({
-        title: 'tim hortons',
-        description: 'I had a pupperchino',
+        title: 'Spanish gold!',
+        description: 'Pesky Cortez left it here.',
         latitude: '49.2825',
-        longitude: '-123.1214',
+        longitude: '-123.1230',
         delete_id: 998,
         user_id: 2,
         map_id: 1
@@ -79,8 +79,8 @@ exports.seed = function (knex, Promise) {
     })
     .then(() => {
       return knex('pins').insert({
-        title: 'starbucks, again',
-        description: 'Saw a cute poodle',
+        title: 'Dogspot',
+        description: 'Saw a cute poodle, very good dog. Had a pat.',
         latitude: '49.2827',
         longitude: '-123.1207',
         delete_id: 999,
