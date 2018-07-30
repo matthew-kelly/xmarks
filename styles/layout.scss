@@ -19,14 +19,29 @@ body {
     padding-bottom: 2em;
     margin-left: auto;
     margin-right: auto;
-    width: 80%
-  } // .maps_table {
-  // position: absolute;
-  // left: 19em;
-  // top: em;
-  // }
-  #table_section {
-    position: relative;
+    width: 80%;
+    height: 1168px;
+  }
+  .container2 {
+    box-shadow: 1px 0px 20px 13px #322929;
+    background-image: url('/images/container_background.jpg');
+    height: 100%;
+    background-size: contain;
+    padding-top: 2em;
+    padding-bottom: 2em;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+  }
+  #pages {
+    display: flex;
+    justify-content: space-between;
+    padding: left;
+    padding-left: 5em;
+    padding: right;
+    padding-right: 5em;
+    margin-bottom: 0em;
+    margin-top: -37em;
   }
   .nav_buttons:hover {
     cursor: pointer;
@@ -52,49 +67,65 @@ body {
   .like_area {
     display: flex;
   }
-  .map_board{
-    display:flex;
-    justify-content:center;
-  }
-  #list_of_all_maps {
-    height: -webkit-fill-available;
-    width: 60%;
-    background-color: wheat;
-    border-radius: 50% 4% / 10% 1%;
-    border: 2px double black;
-    padding-top: 3em;
+  .map_board {
     display: flex;
     justify-content: center;
   }
+  #list_of_all_maps {
+    height: -webkit-fill-available;
+    width: 50%;
+    background-image: url(/images/oldpaper.jpg);
+    border-radius: 50% 4% / 10% 1%;
+    padding-top: 5em;
+    display: flex;
+    justify-content: center;
+    box-shadow: -9px -5px 20px 1px #221f1f;
+    text-shadow: -1px -1px #f3dddd;
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.2em;
+  }
   .nav_buttons {
     box-shadow: 1px 0px 20px 4px #221f1f;
-    height: 2.4em;
+    height: 2.2em;
     border-radius: 3em;
     font-size: 3em;
-    width: 2.4;
+    // width: 2.4;
     position: fixed;
     padding: 3px;
     border: 5px double white;
   }
   #compass {
     background-color: #b1d2d6;
-    bottom: 0.5em;
-    right: 0.5em;
+    top: 0.5em;
+    right: 0.1em;
   }
-  #profile_button{
+  #profile_button {
     background-color: #b1d2d6;
-    bottom: 0.5em;
-    right: 0.5em;
+    top: 0.5em;
+    right: 0.1em;
   }
   #globe {
     background-color: #70afe8;
-    bottom: 3.5em;
-    right: 0.5em;
+    top: 3.5em;
+    right: 0.1em;
+  }
+  #specialclose {
+    display: flex;
+    position: absolute;
+    top: 69em;
+    right: 12em;
   }
   #button_section {
     position: absolute;
-    right: 5.2em;
-    top: -0.1em;
+    right: 5.5em;
+    top: 50em;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    height: 11em;
+  }
+  #button_section:hover{
+    cursor:pointer;
   }
   .info_left {
     position: absolute;
@@ -102,20 +133,36 @@ body {
     left: 6em;
     width: 32%;
   }
+
   .info_right {
     position: absolute;
     top: 5em;
     left: 39em;
     width: 37%;
   }
+
   .tab_button {
-    clip-path: polygon(15% 0, 85% 0, 100% 100%, 0% 100%);
-    padding-left: 2em;
-    padding-right: 2em;
-    margin-right: 0.5em;
-    border-radius: 0.4em;
-    color: white;
+    padding: 0.6em;
+    width: 14em;
+    background: none;
+    height: 85px;
+    width: 107px;
   }
+
+  #map_list {
+    display: flex;
+    justify-content: baseline;
+    /* align-content: unset; */
+    flex-direction: column;
+    width: -webkit-fill-available;
+    padding: 1em;
+  }
+
+  #user_bio {
+    width: -webkit-fill-available;
+    padding: 1em;
+  }
+
   .addressbook {
     background-image: url('/images/address_background.jpeg'); // background-color: $orange;
     border-radius: 2em;
@@ -123,6 +170,7 @@ body {
     height: 40em;
     box-shadow: 0px -3px 25px #322929;
   }
+
   .mapdiv#map {
     overflow: hidden;
     height: 45em;
@@ -132,6 +180,7 @@ body {
     right: 6%;
     top: 2em;
   }
+
   .profile_background {
     border: 0.8em double white;
     box-shadow: 0px -3px 25px #322929;
@@ -141,9 +190,11 @@ body {
     border-radius: 13em;
     padding: 1em;
   }
+
   #pic {
     width: 26em;
   }
+
   .username {
     display: flex;
     justify-content: center;
@@ -152,16 +203,19 @@ body {
     font-weight: bold;
     font-family: 'New Rocker', cursive;
   }
+
   .login_button {
     display: flex;
     justify-content: center;
     align-content: center;
   }
+
   .popup_form {
     margin-left: 15em;
     margin-top: -26em;
     z-index: 999;
   }
+
   .map_buttons {
     display: flex;
     align-content: center;
@@ -171,12 +225,14 @@ body {
     bottom: 27em;
     z-index: 999;
   }
+
   .name_map,
   .close_map,
   .form-group,
   .save_map {
     display: none;
   }
+
   .btn {
     background-color: $teal;
   }
@@ -191,10 +247,12 @@ body {
     left: 40em;
     top: 29em;
   }
+
   .new_map_header {
     display: flex;
     justify-content: center;
   }
+
   #profile_pic {
     border-radius: 20em;
     height: 100%;
@@ -202,14 +260,5 @@ body {
     background-color: white;
     margin: auto;
     overflow: hidden;
-  }
-  .made_button {
-    background-color: $blue;
-  }
-  .liked_button {
-    background-color: $red;
-  }
-  .contrib_button {
-    background-color: $teal;
   }
 }
