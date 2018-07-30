@@ -15,7 +15,6 @@ module.exports = (knex) => {
       .select("*")
       .from("likes")
       .then((results) => {
-        // console.log(results);
         res.json(results);
       });
   });

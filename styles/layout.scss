@@ -1,12 +1,10 @@
 @import 'variables';
-
 body {
   // background-color: darken( #86AFC7, 10%);
   background-image: url('/images/body_background.jpg');
   font-family: 'Ubuntu Condensed', sans-serif;
   font-size: 1.1;
   text-shadow: 1px 0px #615555;
-
   h1 {
     color: #244751;
   }
@@ -60,12 +58,14 @@ body {
   .like_button {
     width: 30px;
     height: 30px;
+    margin-right: 5px;
   }
   .like_button:hover {
     cursor: pointer;
   }
   .like_area {
     display: flex;
+    font-size: 1.1em;
   }
   .map_board {
     display: flex;
@@ -91,6 +91,7 @@ body {
     font-size: 3em;
     // width: 2.4;
     position: fixed;
+    margin-right: 5px;
     padding: 3px;
     border: 5px double white;
   }
@@ -112,12 +113,12 @@ body {
   #specialclose {
     display: flex;
     position: absolute;
-    top: 69em;
+    top: 71em;
     right: 12em;
   }
   #button_section {
     position: absolute;
-    right: 5.5em;
+    right: 7em;
     top: 50em;
     display: flex;
     justify-content: space-between;
@@ -152,15 +153,14 @@ body {
   #map_list {
     display: flex;
     justify-content: baseline;
-    /* align-content: unset; */
     flex-direction: column;
     width: -webkit-fill-available;
-    padding: 1em;
+    padding: 1em 2em;
   }
 
   #user_bio {
     width: -webkit-fill-available;
-    padding: 1em;
+    padding: 1em 2em;
   }
 
   .addressbook {
@@ -202,6 +202,8 @@ body {
     text-shadow: 2px 2px #f4fff9;
     font-weight: bold;
     font-family: 'New Rocker', cursive;
+    font-size: 2.5em;
+    margin: 7px auto 18px;
   }
 
   .login_button {
@@ -222,21 +224,26 @@ body {
     position: relative;
     width: auto;
     justify-content: center;
-    bottom: 27em;
+    bottom: 28.4em;
     z-index: 999;
   }
 
   .name_map,
+  .update_map,
   .close_map,
   .form-group,
   .save_map {
     display: none;
+    &:disabled {
+      color: #fff;
+      border-color: #a0a0a0;
+      background-color: #a0a0a0;
+    }
   }
 
   .btn {
     background-color: $teal;
   }
-
   #name_map_group {
     background-color: $teal;
     border-radius: 10px;
@@ -244,7 +251,7 @@ body {
     justify-content: center;
     flex-direction: column;
     position: absolute;
-    left: 40em;
+    left: 45vw;
     top: 29em;
   }
 
@@ -260,5 +267,62 @@ body {
     background-color: white;
     margin: auto;
     overflow: hidden;
+  }
+
+  .logo-div {
+    background-color: rgb(40, 205, 255);
+    position: relative;
+    height: 170px;
+    width: 400px;
+    margin: auto;
+    margin-top: 2em;
+    border-radius: 50px;
+    box-shadow: 5px 5px 6px 4px rgba(0,0,0,0.5);
+    .color-div-logo {
+      width: 400px;
+      height: 85px;
+      background-color: rgb(86, 175, 86);
+      position: absolute;
+      top: 85px;
+      border-bottom-left-radius: 50px;
+      border-bottom-right-radius: 50px;
+    }
+    h1 {
+      font-family: 'New Rocker', cursive;
+      color: black;
+      position: absolute;
+      top: 75px;
+      margin: auto;
+      font-size: 5em;
+      text-shadow: 1px 1px 1px white;
+    }
+    img {
+      position: absolute;
+      top: 10px;
+      right: 61%;
+    }
+  }
+  .wood-background {
+    background-image: url('/images/container_background.jpg');
+    padding: 3em;
+    margin-top: 3em;
+    box-shadow: 5px 5px 6px 4px rgba(0,0,0,0.5);
+    border-radius: 50px;
+
+    > .form-signin {
+      background-color:rgb(255, 241, 230);
+      box-shadow: 2px 2px 4px 3px rgba(0,0,0,0.3);
+      padding: 2em;
+
+      h1 {
+        font-family: 'New Rocker', cursive;
+        margin-top: 0;
+        font-size: 2em;
+      }
+
+      > * {
+        margin-top: 1em;
+      }
+    }
   }
 }

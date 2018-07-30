@@ -8,6 +8,7 @@ $(() => {
   // on document load hides the map/map buttons/ and the name map form
   $('#map').hide();
   $('.name_map').hide();
+  $('.update_map').hide();
   $('.close_map').hide();
   $('.form-group').hide();
   $('.save_map').hide();
@@ -42,9 +43,9 @@ $(() => {
       shape: shape,
       delete_id: uniqueID,
       draggable: true,
-      dragend: function(m) {
+      dragend: function (m) {
         console.log(marker_index);
-        console.log(m.latLng.lat())
+        console.log(m.latLng.lat());
       }
     });
 
@@ -82,7 +83,7 @@ $(() => {
 
   // Adds event listener to add pins with titles
   function addEventListener(map) {
-    map.addListener('click', function(event) {
+    map.addListener('click', function (event) {
       var title = window.prompt("name this title");
       var description = window.prompt("describe this place");
       if (title && description) {
@@ -121,7 +122,8 @@ $(() => {
   $('#compass').click(function(event) {
     event.preventDefault();
     $('#map').show('fast');
-    $('.name_map').show('fast');
+    $('.name_map').prop('disabled', null).show('fast');
+    $('.update_map').prop('disabled', 'true').show('fast');
     $('.close_map').show('fast');
 
     if (google && google.maps && google.maps.Map) {
@@ -145,7 +147,7 @@ $(() => {
   })
 
   // AJAX call to get the data from whichever map link is clicked and populate the pins on the map
-  $("[id^=user_map]").click(function(event) {
+  $("[id^=user_map]").click(function (event) {
     var id_number = this.id.slice(8);
     var Van = {
       lat: 49.2827,
@@ -181,7 +183,8 @@ $('#globe').click(function(event){
 })
     addEventListener(map);
     $('#map').show('fast');
-    $('.name_map').show('fast');
+    $('.name_map').prop('disabled', 'true').show('fast');
+    $('.update_map').prop('disabled', null).show('fast');
     $('.close_map').show('fast');
     $.ajax({
       method: "GET",
@@ -201,18 +204,26 @@ $('#globe').click(function(event){
           shape: shape,
           delete_id: pin.delete_id,
           draggable: true,
-          dragend: function(m) {
+          dragend: function (m) {
             console.log(marker_index);
-            console.log(m.latLng.lat())
+            console.log(m.latLng.lat());
+            console.log("moved pin");
           }
         })
 
         var infowindow = new google.maps.InfoWindow({
           content: '<h1>' + pin.title + '</h1>' + '<p>' + pin.description + '</p>'
         });
-        marker.addListener('click', function() {
+        marker.addListener('click', function () {
           infowindow.open(map, marker);
         });
+        var innerObj = {};
+        innerObj.title = marker.title;
+        innerObj.description = marker.description;
+        innerObj.latitude = marker.getPosition().lat();
+        innerObj.longitude = marker.getPosition().lng();
+        innerObj.map_id = id_number;
+        markerArr.push(innerObj);
         markers.push(marker);
 
         marker.addListener('dblclick', function() {
@@ -236,7 +247,7 @@ $('#globe').click(function(event){
     });
   })
 
-  $("[id^=like]").click(function(event) {
+  $("[id^=like]").click(function (event) {
     var id_number = this.id.slice(4);
     $.ajax({
       method: "POST",
@@ -246,16 +257,16 @@ $('#globe').click(function(event){
     })
   })
 
-  $('[id^=made]').click(function(event) {
+  $('[id^=made]').click(function (event) {
     var id_number = this.id.slice(4)
     $.ajax({
       method: "GET",
-      url: `/users/${id_number}/made/`
+      url: `/users/${id_number}/made`
     }).done(() => {
       location.reload();
     })
   });
-  $('[id^=liked]').click(function(event) {
+  $('[id^=liked]').click(function (event) {
     var id_number = this.id.slice(5)
     $.ajax({
       method: "GET",
@@ -264,8 +275,7 @@ $('#globe').click(function(event){
       location.reload();
     })
   });
-  $('[id^=contrib]').click(function(event) {
-    console.log(this.id);
+  $('[id^=contrib]').click(function (event) {
     var id_number = this.id.slice(7)
     $.ajax({
       method: "GET",
@@ -275,24 +285,32 @@ $('#globe').click(function(event){
     })
   })
 
+  //When update_map button is clicked, slides the save map form into view and focuses it.
+  $('.update_map').click(function (event) {
+    $('.form-group').show('fast');
+    $('.save_map').show('fast');
+    $('#map_name').focus();
+  })
+
   //When name_map button is clicked, slides the save map form into view and focuses it.
-  $('.name_map').click(function(event) {
+  $('.name_map').click(function (event) {
     $('.form-group').show('fast');
     $('.save_map').show('fast');
     $('#map_name').focus();
   })
 
   // closes map and clears all markers from markerarray.
-  $('.close_map').click(function(event) {
+  $('.close_map').click(function (event) {
     $('#map').hide('fast');
     $('.name_map').hide('fast');
+    $('.update_map').hide('fast');
     $('.close_map').hide('fast');
     $('.form-group').hide('fast');
     $('.save_map').hide('fast');
     deleteMarkers();
   })
 
-  $('#name_map_group').submit(function(event) {
+  $('#name_map_group').submit(function (event) {
     var map_name = $('#map_name').value;
   })
 });
