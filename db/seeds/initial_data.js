@@ -44,6 +44,14 @@ exports.seed = function (knex, Promise) {
       });
     })
     .then(() => {
+      return knex('maps').insert({
+        name: 'Farmers Markets',
+        latitude_center: '49.2827',
+        longitude_center: '-123.1207',
+        user_id: 1
+      });
+    })
+    .then(() => {
       return knex('likes').insert({
         user_id: 1,
         map_id: 2
@@ -53,6 +61,12 @@ exports.seed = function (knex, Promise) {
       return knex('likes').insert({
         user_id: 2,
         map_id: 1
+      });
+    })
+    .then(() => {
+      return knex('likes').insert({
+        user_id: 2,
+        map_id: 3
       });
     })
     .then(() => {
@@ -86,6 +100,28 @@ exports.seed = function (knex, Promise) {
         delete_id: 999,
         user_id: 2,
         map_id: 2
+      });
+    })
+    .then(() => {
+      return knex('pins').insert({
+        title: 'Saturday Morning',
+        description: "Lovely fresh citrus. Need to avoid scurvy somehow!",
+        latitude: '49.2800',
+        longitude: '-123.1230',
+        delete_id: 991,
+        user_id: 1,
+        map_id: 3
+      });
+    })
+    .then(() => {
+      return knex('pins').insert({
+        title: 'Sunday Afternoons',
+        description: "Great spot for all the wee landlubbers!",
+        latitude: '49.2800',
+        longitude: '-123.1300',
+        delete_id: 990,
+        user_id: 1,
+        map_id: 3
       });
     })
 };
